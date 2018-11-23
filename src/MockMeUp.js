@@ -55,7 +55,9 @@ class MockMeUp extends React.Component {
         .replace('{device-width}', deviceInnerWidth ? deviceInnerWidth : 'min-width: 100%;')
         .replace('{link}', '')
     if (image) {
-      html2canvas(this.mockupContainer.current).then(function (canvas) {
+      html2canvas(this.mockupContainer.current, {
+        backgroundColor: null,
+      }).then(function (canvas) {
         document.body.appendChild(canvas);
       });
     }
