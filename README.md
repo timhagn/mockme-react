@@ -43,6 +43,10 @@ These are the same as in [html5-device-mockups](https://github.com/pixelsign/htm
 
 ## Usage
 
+Spin it up and drop an image on the marked dropzone.  
+Below you are gonna see a preview of your image and the MockUp.  
+After dropping an image, html2canvas will create a canvas you can download it from. 
+
 See `src/DropzonePreview.js` for a simple usage example with `react-dropzone`.  
 See `src/MockMeUp.js` for an in-depth view.
 
