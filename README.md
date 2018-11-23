@@ -65,6 +65,10 @@ whereas the propTypes define the following:
 - deviceInnerWidth: String with CSS for inner Width, defaults to `'min-width: 100%;'`
 - mockUpStyle: String with CSS to Style the inner behavior of the Image to Mock
 
+## Initialization
+
+Don't forget to run: `yarn` or `npm install` after cloning this Repo!
+
 ## Available Scripts
 
 In the project directory, you can run:
