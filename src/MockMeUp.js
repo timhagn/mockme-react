@@ -1,6 +1,7 @@
 import React from "react";
 import 'html5-device-mockups/dist/device-mockups.min.css'
 import html2canvas from 'html2canvas'
+import PropTypes from "prop-types"
 
 const htmlTemplate = `
 <div class="device-wrapper" style="{device-width}">
@@ -14,7 +15,7 @@ const htmlTemplate = `
 </div>
 `
 
-class MockupIframe extends React.Component {
+class MockMeUp extends React.Component {
   constructor(props) {
     super(props);
     this.mockupContainer = React.createRef();
@@ -36,8 +37,8 @@ class MockupIframe extends React.Component {
   updateMockupContainer = (image = '') => {
     const {
       device,
-      deviceWidth,
-      deviceStyle,
+      deviceInnerWidth,
+      mockUpStyle,
     } = this.props
 
     const screen = `
@@ -45,18 +46,19 @@ class MockupIframe extends React.Component {
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
-      ${deviceStyle}
+      ${mockUpStyle}
     `
 
     this.mockupContainer.current.innerHTML = htmlTemplate
         .replace('{mockup-device}', device ? device : 'Chromebook')
         .replace('{screen-style}', screen)
-        .replace('{device-width}', deviceWidth ? deviceWidth : 'min-width: 100%;')
+        .replace('{device-width}', deviceInnerWidth ? deviceInnerWidth : 'min-width: 100%;')
         .replace('{link}', '')
-
-    html2canvas(this.mockupContainer.current).then(function (canvas) {
-      document.body.appendChild(canvas);
-    });
+    if (image) {
+      html2canvas(this.mockupContainer.current).then(function (canvas) {
+        document.body.appendChild(canvas);
+      });
+    }
   }
 
   componentDidMount() {
@@ -71,13 +73,27 @@ class MockupIframe extends React.Component {
   }
 
   render() {
+    const { style = {} } = this.props
+    const containerStyle = {
+      minWidth: '800px',
+      ...style,
+    }
     return (
         <div>
           <div ref={this.mockupContainer}
-               id="mockup"></div>
+               id="mockup"
+               style={{...containerStyle,}}></div>
         </div>
     );
   }
 }
 
-export default MockupIframe
+MockMeUp.propTypes = {
+  style: PropTypes.object,
+  srcImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  device: PropTypes.string,
+  deviceInnerWidth: PropTypes.string,
+  mockUpStyle: PropTypes.string,
+}
+
+export default MockMeUp

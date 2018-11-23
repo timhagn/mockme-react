@@ -1,6 +1,6 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
-import MockupIframe from "./DeviceMockup";
+import MockMeUp from "./MockMeUp";
 
 const thumbsContainer = {
   display: 'flex',
@@ -84,15 +84,17 @@ class DropzoneWithPreview extends React.Component {
           <div className="dropzone">
             <Dropzone
                 accept="image/*"
-                onDrop={this.onDrop.bind(this)}
-            />
+                onDrop={this.onDrop.bind(this)}>
+              <p>Drop your image to MockUp here, or click to select.</p>
+            </Dropzone>
+
           </div>
           <aside style={thumbsContainer}>
             {thumbs}
           </aside>
-          <MockupIframe srcImage={srcFile}
-                        device="SurfaceStudio"
-                        deviceStyle="background-size: cover;" />
+          <MockMeUp srcImage={srcFile}
+                    device="SurfaceStudio"
+                    mockUpStyle="background-size: cover;" />
         </section>
     );
   }
