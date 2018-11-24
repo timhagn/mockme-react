@@ -2,10 +2,14 @@ import React from "react";
 import 'html5-device-mockups/dist/device-mockups.min.css'
 import html2canvas from 'html2canvas'
 import PropTypes from "prop-types"
+import DEVICES from "./DeviceConstants";
 
 const htmlTemplate = `
 <div class="device-wrapper" style="{device-width}">
-  <div class="device" data-device="{mockup-device}" data-orientation="portrait" data-color="black">
+  <div class="device" 
+       data-device="{mockup-device}" 
+       data-orientation="{mockup-orientation}" 
+       data-color="{mockup-color}">
     <div class="screen" style="{screen-style}">
     </div>
     <div class="button">
@@ -34,15 +38,17 @@ class MockMeUp extends React.Component {
     }
   }
 
-  updateMockupContainer = (image = '') => {
+  updateMockupContainer = (mockupImage = '') => {
     const {
-      device,
-      deviceInnerWidth,
+      device = 'Chromebook',
+      deviceOrientation = 'portrait',
+      deviceColor = DEVICES[device][deviceOrientation].color[0],
+      deviceInnerWidth = 'min-width: 100%;',
       mockUpStyle,
     } = this.props
 
-    const screen = `
-      background-image: url('${image}');
+    const screenStyle = `
+      background-image: url('${mockupImage}');
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
@@ -50,11 +56,13 @@ class MockMeUp extends React.Component {
     `
 
     this.mockupContainer.current.innerHTML = htmlTemplate
-        .replace('{mockup-device}', device ? device : 'Chromebook')
-        .replace('{screen-style}', screen)
-        .replace('{device-width}', deviceInnerWidth ? deviceInnerWidth : 'min-width: 100%;')
+        .replace('{mockup-device}', device)
+        .replace('{mockup-orientation}', deviceOrientation)
+        .replace('{mockup-color}', deviceColor)
+        .replace('{screen-style}', screenStyle)
+        .replace('{device-width}', deviceInnerWidth)
         .replace('{link}', '')
-    if (image) {
+    if (mockupImage) {
       html2canvas(this.mockupContainer.current, {
         backgroundColor: null,
       }).then(function (canvas) {
@@ -81,11 +89,11 @@ class MockMeUp extends React.Component {
       ...style,
     }
     return (
-        <div>
+        <>
           <div ref={this.mockupContainer}
                id="mockup"
                style={{...containerStyle,}}></div>
-        </div>
+        </>
     );
   }
 }
@@ -94,6 +102,8 @@ MockMeUp.propTypes = {
   style: PropTypes.object,
   srcImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   device: PropTypes.string,
+  deviceOrientation: PropTypes.string,
+  deviceColor: PropTypes.string,
   deviceInnerWidth: PropTypes.string,
   mockUpStyle: PropTypes.string,
 }

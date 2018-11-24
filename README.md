@@ -57,6 +57,8 @@ MockMeUp.propTypes = {
   style: PropTypes.object,
   srcImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   device: PropTypes.string,
+  deviceOrientation: PropTypes.string,
+  deviceColor: PropTypes.string,  
   deviceInnerWidth: PropTypes.string,
   mockUpStyle: PropTypes.string,
 }
@@ -66,6 +68,8 @@ whereas the propTypes define the following:
 - style: Style Object for the container component, defaults to `minWidth: '800px'`
 - srcImage: A [File](https://developer.mozilla.org/en-US/docs/Web/API/File) Object or an empty String
 - device: One of the devices above, defaults to 'Chromebook'
+- deviceOrientation: One of the device orientations above, defaults to 'portrait',
+- deviceColor: One of the device colors above, defaults to the devices first color,
 - deviceInnerWidth: String with CSS for inner Width, defaults to `'min-width: 100%;'`
 - mockUpStyle: String with CSS to Style the inner behavior of the Image to Mock
 
