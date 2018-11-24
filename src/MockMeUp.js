@@ -36,7 +36,7 @@ class MockMeUp extends React.Component {
       deviceOrientation,
       deviceColor,
       mockUpStyle,
-    } = this.props
+    } = this.fixProps()
 
     if (prevProps.srcImage !== srcImage) {
       this.loadImage()
@@ -46,6 +46,31 @@ class MockMeUp extends React.Component {
         prevProps.deviceColor !== deviceColor ||
         prevProps.mockUpStyle !== mockUpStyle) {
       srcImage ? this.loadImage() : this.updateMockupContainer()
+    }
+  }
+
+  fixProps = () => {
+    const {
+      deviceName = 'Chromebook',
+      deviceOrientation = 'portrait',
+      deviceColor = 'black',
+    } = this.props
+
+    const currentOrientation =
+        (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
+            Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
+            deviceOrientation :
+            'portrait'
+
+    const currentColor =
+        DEVICES[deviceName][currentOrientation].color.indexOf(deviceColor) === -1 ?
+            DEVICES[deviceName][currentOrientation].color[0] :
+            deviceColor
+
+    return {
+      ...this.props,
+      deviceOrientation: currentOrientation,
+      deviceColor: currentColor,
     }
   }
 
@@ -69,7 +94,7 @@ class MockMeUp extends React.Component {
       deviceInnerWidth = 'min-width: 100%;',
       deviceColor = 'black',
       mockUpStyle,
-    } = this.props
+    } = this.fixProps()
 
     const screenStyle = `
       background-image: url('${mockupImage}');
@@ -78,21 +103,10 @@ class MockMeUp extends React.Component {
       background-repeat: no-repeat;
       ${mockUpStyle}
     `
-    const currentOrientation =
-        (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
-            Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
-            deviceOrientation :
-            'portrait'
-
-    const currentColor =
-        DEVICES[deviceName][currentOrientation].color.indexOf(deviceColor) === -1 ?
-            DEVICES[deviceName][currentOrientation].color[0] :
-            deviceColor
-
     this.mockupContainer.current.innerHTML = htmlTemplate
         .replace('{mockup-device}', deviceName)
-        .replace('{mockup-orientation}', currentOrientation.replace('_red', ''))
-        .replace('{mockup-color}', currentColor)
+        .replace('{mockup-orientation}', deviceOrientation.replace('_red', ''))
+        .replace('{mockup-color}', deviceColor)
         .replace('{screen-style}', screenStyle)
         .replace('{device-width}', deviceInnerWidth)
         .replace('{link}', '')
@@ -111,17 +125,11 @@ class MockMeUp extends React.Component {
       style = {},
       deviceName,
       deviceOrientation,
-    } = this.props
-
-    const currentOrientation =
-        (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
-            Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
-            deviceOrientation :
-            'portrait'
+    } = this.fixProps()
 
     const containerStyle = {
-      minWidth: DEVICES[deviceName][currentOrientation].image_width < 800 ?
-          `${DEVICES[deviceName][currentOrientation].image_width}px` : `800px`,
+      minWidth: DEVICES[deviceName][deviceOrientation].image_width < 800 ?
+          `${DEVICES[deviceName][deviceOrientation].image_width}px` : `800px`,
       ...style,
     }
     return (
