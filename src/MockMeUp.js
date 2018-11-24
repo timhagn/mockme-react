@@ -37,7 +37,7 @@ class MockMeUp extends React.Component {
       deviceColor,
       mockUpStyle,
     } = this.props
-    console.log(deviceColor)
+
     if (prevProps.srcImage !== srcImage) {
       this.loadImage()
     }
@@ -67,9 +67,10 @@ class MockMeUp extends React.Component {
       deviceName = 'Chromebook',
       deviceOrientation = 'portrait',
       deviceInnerWidth = 'min-width: 100%;',
-      deviceColor = DEVICES[this.props.deviceName][this.props.deviceOrientation].color[0],
+      deviceColor = 'black',
       mockUpStyle,
     } = this.props
+
     const screenStyle = `
       background-image: url('${mockupImage}');
       background-position: center;
@@ -77,13 +78,21 @@ class MockMeUp extends React.Component {
       background-repeat: no-repeat;
       ${mockUpStyle}
     `
+    const currentOrientation =
+        (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
+            Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
+            deviceOrientation :
+            'portrait'
 
-    console.log(DEVICES[deviceName][deviceOrientation].color[0])
+    const currentColor =
+        DEVICES[deviceName][currentOrientation].color.indexOf(deviceColor) === -1 ?
+            DEVICES[deviceName][currentOrientation].color[0] :
+            deviceColor
 
     this.mockupContainer.current.innerHTML = htmlTemplate
         .replace('{mockup-device}', deviceName)
-        .replace('{mockup-orientation}', deviceOrientation.replace('_red', ''))
-        .replace('{mockup-color}', deviceColor)
+        .replace('{mockup-orientation}', currentOrientation.replace('_red', ''))
+        .replace('{mockup-color}', currentColor)
         .replace('{screen-style}', screenStyle)
         .replace('{device-width}', deviceInnerWidth)
         .replace('{link}', '')
@@ -103,9 +112,16 @@ class MockMeUp extends React.Component {
       deviceName,
       deviceOrientation,
     } = this.props
+
+    const currentOrientation =
+        (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
+            Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
+            deviceOrientation :
+            'portrait'
+
     const containerStyle = {
-      minWidth: DEVICES[deviceName][deviceOrientation].image_width < 800 ?
-          `${DEVICES[deviceName][deviceOrientation].image_width}px` : `800px`,
+      minWidth: DEVICES[deviceName][currentOrientation].image_width < 800 ?
+          `${DEVICES[deviceName][currentOrientation].image_width}px` : `800px`,
       ...style,
     }
     return (

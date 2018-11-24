@@ -1,7 +1,13 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
-import MockMeUp from "./MockMeUp";
-import DEVICES from "./DeviceConstants";
+import MockMeUp from './MockMeUp'
+import DEVICES from './DeviceConstants'
+import {
+  ColorCombo,
+  DeviceCombo,
+  OrientationCombo,
+  SizeCombo
+} from './ComboComponents'
 
 const thumbsContainer = {
   display: 'flex',
@@ -72,8 +78,8 @@ class DropzoneWithPreview extends React.Component {
     // Make sure to revoke the data uris to avoid memory leaks
     const {files} = this.state;
     for (let i = files.length; i >= 0; i--) {
-      const file = files[0];
-      URL.revokeObjectURL(file.preview);
+      const file = files[i]
+      URL.revokeObjectURL(file.preview)
     }
   }
 
@@ -127,58 +133,5 @@ class DropzoneWithPreview extends React.Component {
     );
   }
 }
-
-const DeviceCombo = ({onChange, selectedDevice = 'Chromebook', DEVICES}) => {
-  const options = Object.keys(DEVICES).map(deviceName => {
-    return (
-      <option key={deviceName}
-              value={deviceName}>
-        {deviceName}
-      </option>
-    )
-  })
-  return (
-      <select id="devices"
-              value={selectedDevice}
-              onChange={onChange}>
-        {options}
-      </select>
-  )
-}
-
-const OrientationCombo = ({deviceName, onChange, DEVICES}) => {
-  const options = Object.keys(DEVICES[deviceName]).map(orientation => (
-      <option key={orientation}
-              value={orientation}>
-        {orientation}
-      </option>
-  ))
-  return (
-      <select id="orientation" onChange={onChange}>
-        {options}
-      </select>
-  )
-}
-
-const ColorCombo = ({deviceName, deviceOrientation, onChange, DEVICES}) => {
-  const options = DEVICES[deviceName][deviceOrientation].color.map(color => (
-      <option key={color}
-              value={color}>
-        {color}
-      </option>
-  ))
-  return (
-      <select id="color" onChange={onChange}>
-        {options}
-      </select>
-  )
-}
-
-const SizeCombo = ({onChange}) => (
-    <select id="color" onChange={onChange}>
-      <option value="contain">contain</option>
-      <option value="cover">cover</option>
-    </select>
-)
 
 export default DropzoneWithPreview
