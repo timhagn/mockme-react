@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 import 'html5-device-mockups/dist/device-mockups.min.css'
 import html2canvas from 'html2canvas'
-import PropTypes from "prop-types"
-import DEVICES from "./DeviceConstants";
+import PropTypes from 'prop-types'
+import DEVICES from './DeviceConstants'
 
 const htmlTemplate = `
 <div class="device-wrapper" style="{device-width}">
@@ -25,6 +25,30 @@ class MockMeUp extends React.Component {
     this.mockupContainer = React.createRef();
   }
 
+  componentDidMount() {
+    this.updateMockupContainer()
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      srcImage,
+      deviceName,
+      deviceOrientation,
+      deviceColor,
+      mockUpStyle,
+    } = this.props
+    console.log(deviceColor)
+    if (prevProps.srcImage !== srcImage) {
+      this.loadImage()
+    }
+    if (prevProps.deviceName !== deviceName ||
+        prevProps.deviceOrientation !== deviceOrientation ||
+        prevProps.deviceColor !== deviceColor ||
+        prevProps.mockUpStyle !== mockUpStyle) {
+      srcImage ? this.loadImage() : this.updateMockupContainer()
+    }
+  }
+
   loadImage = () => {
     const { srcImage } = this.props
     const reader  = new FileReader();
@@ -40,13 +64,12 @@ class MockMeUp extends React.Component {
 
   updateMockupContainer = (mockupImage = '') => {
     const {
-      device = 'Chromebook',
+      deviceName = 'Chromebook',
       deviceOrientation = 'portrait',
-      deviceColor = DEVICES[device][deviceOrientation].color[0],
       deviceInnerWidth = 'min-width: 100%;',
+      deviceColor = DEVICES[this.props.deviceName][this.props.deviceOrientation].color[0],
       mockUpStyle,
     } = this.props
-
     const screenStyle = `
       background-image: url('${mockupImage}');
       background-position: center;
@@ -55,13 +78,16 @@ class MockMeUp extends React.Component {
       ${mockUpStyle}
     `
 
+    console.log(DEVICES[deviceName][deviceOrientation].color[0])
+
     this.mockupContainer.current.innerHTML = htmlTemplate
-        .replace('{mockup-device}', device)
-        .replace('{mockup-orientation}', deviceOrientation)
+        .replace('{mockup-device}', deviceName)
+        .replace('{mockup-orientation}', deviceOrientation.replace('_red', ''))
         .replace('{mockup-color}', deviceColor)
         .replace('{screen-style}', screenStyle)
         .replace('{device-width}', deviceInnerWidth)
         .replace('{link}', '')
+
     if (mockupImage) {
       html2canvas(this.mockupContainer.current, {
         backgroundColor: null,
@@ -71,21 +97,15 @@ class MockMeUp extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.updateMockupContainer()
-  }
-
-  componentDidUpdate(prevProps) {
-    const { srcImage } = this.props
-    if (prevProps.srcImage !== srcImage) {
-      this.loadImage()
-    }
-  }
-
   render() {
-    const { style = {} } = this.props
+    const {
+      style = {},
+      deviceName,
+      deviceOrientation,
+    } = this.props
     const containerStyle = {
-      minWidth: '800px',
+      minWidth: DEVICES[deviceName][deviceOrientation].image_width < 800 ?
+          `${DEVICES[deviceName][deviceOrientation].image_width}px` : `800px`,
       ...style,
     }
     return (
@@ -101,7 +121,7 @@ class MockMeUp extends React.Component {
 MockMeUp.propTypes = {
   style: PropTypes.object,
   srcImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  device: PropTypes.string,
+  deviceName: PropTypes.string,
   deviceOrientation: PropTypes.string,
   deviceColor: PropTypes.string,
   deviceInnerWidth: PropTypes.string,

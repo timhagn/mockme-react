@@ -1,10 +1,11 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
 import MockMeUp from "./MockMeUp";
+import DEVICES from "./DeviceConstants";
 
 const thumbsContainer = {
   display: 'flex',
-  flexDirection: 'row',
+  flexDirection: 'column',
   flexWrap: 'wrap',
   marginTop: 16
 };
@@ -37,11 +38,16 @@ class DropzoneWithPreview extends React.Component {
   constructor() {
     super()
     this.state = {
-      files: []
+      files: [],
+      deviceName: 'Chromebook',
+      deviceOrientation: 'portrait',
+      deviceColor: DEVICES['Chromebook']['portrait'].color[0],
+      imageSize: 'contain',
     };
+    this.handlers = [];
   }
 
-  onDrop(files) {
+  onDrop = files => {
     this.setState({
       files: files.map(file => {
         return {
@@ -51,6 +57,15 @@ class DropzoneWithPreview extends React.Component {
         }
       })
     });
+  }
+
+  handleChange = name => {
+    if (!this.handlers[name]) {
+      this.handlers[name] = event => {
+        this.setState({ [name]: event.target.value });
+      };
+    }
+    return this.handlers[name];
   }
 
   componentWillUnmount() {
@@ -84,20 +99,86 @@ class DropzoneWithPreview extends React.Component {
           <div className="dropzone">
             <Dropzone
                 accept="image/*"
-                onDrop={this.onDrop.bind(this)}>
+                multiple={false}
+                onDrop={this.onDrop}>
               <p>Drop your image to MockUp here, or click to select.</p>
             </Dropzone>
-
           </div>
+          <DeviceCombo onChange={this.handleChange('deviceName')}
+                       selectedDevice={this.state.deviceName}
+                       DEVICES={DEVICES} />
+          <OrientationCombo onChange={this.handleChange('deviceOrientation')}
+                            deviceName={this.state.deviceName}
+                            DEVICES={DEVICES} />
+          <ColorCombo onChange={this.handleChange('deviceColor')}
+                      deviceName={this.state.deviceName}
+                      deviceOrientation={this.state.deviceOrientation}
+                      DEVICES={DEVICES}/>
           <aside style={thumbsContainer}>
             {thumbs}
           </aside>
+          <SizeCombo onChange={this.handleChange('imageSize')} />
           <MockMeUp srcImage={srcFile}
-                    device="SurfaceStudio"
-                    mockUpStyle="background-size: cover;" />
+                    deviceName={this.state.deviceName}
+                    deviceOrientation={this.state.deviceOrientation}
+                    deviceColor={this.state.deviceColor}
+                    mockUpStyle={`background-size: ${this.state.imageSize};`} />
         </section>
     );
   }
 }
+
+const DeviceCombo = ({onChange, selectedDevice = 'Chromebook', DEVICES}) => {
+  const options = Object.keys(DEVICES).map(deviceName => {
+    return (
+      <option key={deviceName}
+              value={deviceName}>
+        {deviceName}
+      </option>
+    )
+  })
+  return (
+      <select id="devices"
+              value={selectedDevice}
+              onChange={onChange}>
+        {options}
+      </select>
+  )
+}
+
+const OrientationCombo = ({deviceName, onChange, DEVICES}) => {
+  const options = Object.keys(DEVICES[deviceName]).map(orientation => (
+      <option key={orientation}
+              value={orientation}>
+        {orientation}
+      </option>
+  ))
+  return (
+      <select id="orientation" onChange={onChange}>
+        {options}
+      </select>
+  )
+}
+
+const ColorCombo = ({deviceName, deviceOrientation, onChange, DEVICES}) => {
+  const options = DEVICES[deviceName][deviceOrientation].color.map(color => (
+      <option key={color}
+              value={color}>
+        {color}
+      </option>
+  ))
+  return (
+      <select id="color" onChange={onChange}>
+        {options}
+      </select>
+  )
+}
+
+const SizeCombo = ({onChange}) => (
+    <select id="color" onChange={onChange}>
+      <option value="contain">contain</option>
+      <option value="cover">cover</option>
+    </select>
+)
 
 export default DropzoneWithPreview

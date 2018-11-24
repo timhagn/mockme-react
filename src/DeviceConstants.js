@@ -347,7 +347,6 @@ const DEVICES = {
       bottom_left: 368,
     },
     'portrait_red': {
-      original_name: 'iPhone7',
       orientation: 'portrait',
       color: ['red',],
       image_width: 314,
@@ -375,7 +374,6 @@ const DEVICES = {
       bottom_left: 1582,
     },
     'landscape_red': {
-      original_name: 'iPhone7',
       orientation: 'landscape',
       color: ['red',],
       image_width: 634,

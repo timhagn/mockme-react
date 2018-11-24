@@ -56,7 +56,7 @@ The class `<MockMeUp />` has the following PropTypes at the moment:
 MockMeUp.propTypes = {
   style: PropTypes.object,
   srcImage: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  device: PropTypes.string,
+  deviceName: PropTypes.string,
   deviceOrientation: PropTypes.string,
   deviceColor: PropTypes.string,  
   deviceInnerWidth: PropTypes.string,
@@ -67,7 +67,7 @@ MockMeUp.propTypes = {
 whereas the propTypes define the following:
 - style: Style Object for the container component, defaults to `minWidth: '800px'`
 - srcImage: A [File](https://developer.mozilla.org/en-US/docs/Web/API/File) Object or an empty String
-- device: One of the devices above, defaults to 'Chromebook'
+- deviceName: One of the devices above, defaults to 'Chromebook'
 - deviceOrientation: One of the device orientations above, defaults to 'portrait',
 - deviceColor: One of the device colors above, defaults to the devices first color,
 - deviceInnerWidth: String with CSS for inner Width, defaults to `'min-width: 100%;'`
