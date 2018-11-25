@@ -33,11 +33,12 @@ export const OrientationCombo = ({deviceName, onChange, DEVICES}) => {
 }
 
 export const ColorCombo = ({deviceName, deviceOrientation, onChange, DEVICES}) => {
+  console.log(DEVICES[deviceName])
   const currentOrientation =
       (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
       Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
           deviceOrientation :
-          'portrait'
+          Object.keys(DEVICES[deviceName])[0]
   const options = DEVICES[deviceName][currentOrientation].color.map(color => (
       <option key={color}
               value={color}>

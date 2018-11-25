@@ -492,7 +492,7 @@ const DEVICES = {
     },
   },
   'SurfacePro3': {
-    'portrait': {
+    'landscape': {
       color: ['black',],
       image_width: 3621,
       image_height: 2468,

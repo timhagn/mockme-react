@@ -22,7 +22,8 @@ const htmlTemplate = `
 class MockMeUp extends React.Component {
   constructor(props) {
     super(props);
-    this.mockupContainer = React.createRef();
+    this.mockupContainer = React.createRef()
+    this.returnCanvas = React.createRef()
   }
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class MockMeUp extends React.Component {
         (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
             Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
             deviceOrientation :
-            'portrait'
+            Object.keys(DEVICES[deviceName])[0]
 
     const currentColor =
         DEVICES[deviceName][currentOrientation].color.indexOf(deviceColor) === -1 ?
@@ -99,13 +100,13 @@ class MockMeUp extends React.Component {
         .replace('{device-width}', deviceInnerWidth)
         .replace('{link}', '')
 
-    if (mockupImage) {
-      html2canvas(this.mockupContainer.current, {
-        backgroundColor: null,
-      }).then(function (canvas) {
-        document.body.appendChild(canvas);
-      });
-    }
+    html2canvas(this.mockupContainer.current, {
+      backgroundColor: null,
+      canvas: this.returnCanvas.current
+    })
+    // .then((canvas) => {
+    //   console.log('drew')
+    // });
   }
 
   render() {
@@ -122,9 +123,19 @@ class MockMeUp extends React.Component {
     }
     return (
         <>
-          <div ref={this.mockupContainer}
-               id="mockup"
-               style={{...containerStyle,}}></div>
+          <div style={{
+            position: `absolute`,
+            top: -10000,
+            right: 10000,
+            opacity: 0,
+          }}>
+            <div ref={this.mockupContainer}
+                 id="mockup"
+                 style={{
+                    ...containerStyle,}}></div>
+          </div>
+          <canvas ref={this.returnCanvas}
+                  id="return-mockup" />
         </>
     );
   }
