@@ -123,6 +123,8 @@ class MockMeUp extends React.Component {
     }
     return (
         <>
+          <canvas ref={this.returnCanvas}
+                  id="mockedme-canvas" />
           <div style={{
             position: `absolute`,
             top: -10000,
@@ -132,10 +134,8 @@ class MockMeUp extends React.Component {
             <div ref={this.mockupContainer}
                  id="mockup"
                  style={{
-                    ...containerStyle,}}></div>
+                   ...containerStyle,}}></div>
           </div>
-          <canvas ref={this.returnCanvas}
-                  id="return-mockup" />
         </>
     );
   }
