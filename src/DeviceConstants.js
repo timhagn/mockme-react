@@ -610,3 +610,13 @@ const DEVICES = {
 }
 
 export default DEVICES
+
+export const deviceWidth = (deviceName, deviceOrientation) =>
+    DEVICES[deviceName][deviceOrientation].image_width
+    - DEVICES[deviceName][deviceOrientation].screen_left
+    - DEVICES[deviceName][deviceOrientation].screen_right
+
+export const deviceHeight = (deviceName, deviceOrientation) =>
+    DEVICES[deviceName][deviceOrientation].image_height
+    - DEVICES[deviceName][deviceOrientation].screen_top
+    - DEVICES[deviceName][deviceOrientation].screen_bottom

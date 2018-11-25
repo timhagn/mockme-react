@@ -1,13 +1,14 @@
 import React from 'react'
 import Dropzone from 'react-dropzone'
 import MockMeUp from './MockMeUp'
-import DEVICES from './DeviceConstants'
+import DEVICES, {deviceHeight, deviceWidth} from './DeviceConstants'
 import {
   ColorCombo,
   DeviceCombo,
   OrientationCombo,
   SizeCombo
 } from './ComboComponents'
+import CaptureURIInput from "./CaptureURI";
 
 const thumbsContainer = {
   display: 'flex',
@@ -49,8 +50,10 @@ class DropzoneWithPreview extends React.Component {
       deviceOrientation: 'portrait',
       deviceColor: DEVICES['Chromebook']['portrait'].color[0],
       imageSize: 'contain',
+      url: '',
     };
     this.handlers = [];
+    this.urlInput = React.createRef()
   }
 
   onDrop = files => {
@@ -68,10 +71,23 @@ class DropzoneWithPreview extends React.Component {
   handleChange = name => {
     if (!this.handlers[name]) {
       this.handlers[name] = event => {
-        this.setState({ [name]: event.target.value });
+        this.setState({ [name]: event.target.value })
       };
     }
-    return this.handlers[name];
+    return this.handlers[name]
+  }
+
+  handleClick = event => {
+    const {
+      deviceName,
+      deviceOrientation,
+    } = this.state
+    // Calculate "responsive" device screen-size.
+    const width = deviceWidth(deviceName, deviceOrientation),
+          height = deviceHeight(deviceName, deviceOrientation)
+    const screengrabURI =
+        `http://localhost/sc/screenshot.php?url=${this.urlInput.current.value}&w=${width}&h=${height}`
+    this.setState({ url: screengrabURI  })
   }
 
   componentWillUnmount() {
@@ -98,7 +114,9 @@ class DropzoneWithPreview extends React.Component {
         </div>
     ));
 
-    const srcFile = Array.isArray(files) && files.length > 0 ? files[0].completeFile : ''
+    const srcFile = Array.isArray(files) && files.length > 0
+        ? files[0].completeFile
+        : this.state.url ? this.state.url : ''
 
     return (
         <section>
@@ -110,6 +128,7 @@ class DropzoneWithPreview extends React.Component {
               <p>Drop your image to MockUp here, or click to select.</p>
             </Dropzone>
           </div>
+          <CaptureURIInput ref={this.urlInput} onClick={this.handleClick}/>
           <DeviceCombo onChange={this.handleChange('deviceName')}
                        selectedDevice={this.state.deviceName}
                        DEVICES={DEVICES} />

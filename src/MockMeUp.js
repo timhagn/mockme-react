@@ -63,16 +63,25 @@ class MockMeUp extends React.Component {
     }
   }
 
+  isString = (isAString) =>
+      Object.prototype.toString.call(isAString) === "[object String]"
+
   loadImage = () => {
     const { srcImage } = this.props
-    const reader  = new FileReader();
 
-    reader.addEventListener("load", () => {
-      this.updateMockupContainer(reader.result)
-    }, false);
+    if (srcImage && this.isString(srcImage)) {
+      this.updateMockupContainer(srcImage)
+    }
+    else {
+      const reader = new FileReader();
 
-    if (srcImage) {
-      reader.readAsDataURL(srcImage)
+      reader.addEventListener("load", () => {
+        this.updateMockupContainer(reader.result)
+      }, false);
+
+      if (srcImage) {
+        reader.readAsDataURL(srcImage)
+      }
     }
   }
 
@@ -85,7 +94,7 @@ class MockMeUp extends React.Component {
       mockUpStyle,
     } = this.fixProps()
 
-    const screenStyle = `
+    const screenStyle = mockupImage === '' ? {} : `
       background-image: url('${mockupImage}');
       background-position: center;
       background-size: contain;
@@ -102,11 +111,10 @@ class MockMeUp extends React.Component {
 
     html2canvas(this.mockupContainer.current, {
       backgroundColor: null,
-      canvas: this.returnCanvas.current
+      // proxy: `http://localhost/h2cp/html2canvasproxy.php`,
+      useCORS: true,
+      canvas: this.returnCanvas.current,
     })
-    // .then((canvas) => {
-    //   console.log('drew')
-    // });
   }
 
   render() {
