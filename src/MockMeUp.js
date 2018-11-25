@@ -30,22 +30,10 @@ class MockMeUp extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      srcImage,
-      deviceName,
-      deviceOrientation,
-      deviceColor,
-      mockUpStyle,
-    } = this.fixProps()
+    const newProps = this.fixProps()
 
-    if (prevProps.srcImage !== srcImage) {
-      this.loadImage()
-    }
-    if (prevProps.deviceName !== deviceName ||
-        prevProps.deviceOrientation !== deviceOrientation ||
-        prevProps.deviceColor !== deviceColor ||
-        prevProps.mockUpStyle !== mockUpStyle) {
-      srcImage ? this.loadImage() : this.updateMockupContainer()
+    if (newProps !== prevProps) {
+      newProps.srcImage ? this.loadImage() : this.updateMockupContainer()
     }
   }
 
