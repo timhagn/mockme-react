@@ -10,12 +10,13 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-dropzone": "^7.0.1",
-    "react-scripts": "2.1.1",
-    "prop-types": "latest"
+    "react-scripts-rewired": "^2.1.1",
+    "prop-types": "^15.6.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:dist": "cd build && cat static/js/*.js > ../dist/mockme.js && cat static/css/*.css > ../dist/mockme.css",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
