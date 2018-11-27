@@ -118,8 +118,10 @@ class MockMeController extends ControllerBase {
         // Try to get OpenGraph / Twitter image.
         if ($pageOGImage = $this->getOpenGraphImage($snapshotURL) &&
             !$request->get('noog')) {
-          $ogImageContent = imagecreatefromstring(file_get_contents($pageOGImage));
+          $ogImageContent =
+            imagecreatefromstring(file_get_contents($pageOGImage));
           imagejpeg($ogImageContent, $snapshotFile, 100);
+
           $imageInfo = getimagesize($snapshotFile);
           $response = $this->returnImage($snapshotFile, $imageInfo['mime']);
         }
@@ -127,8 +129,9 @@ class MockMeController extends ControllerBase {
           // Else try to create snapshot.
           $screen = new Capture($snapshotURL);
           $screen->setImageType('jpg');
-          $screen->jobs->setLocation($this->fileSystem->realpath($this->jobsDir) . DIRECTORY_SEPARATOR);
-//          $screen->output->setLocation($this->fileSystem->realpath($this->snapshotDir));
+
+          $screen->jobs
+            ->setLocation($this->fileSystem->realpath($this->jobsDir));
 
           // Do we have a requested width and / or height?
           if ($width = $request->get('w')) {

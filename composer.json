@@ -13,6 +13,7 @@
   "homepage": "https://bitbucket.org/timhagn/mockme",
   "minimum-stability": "dev",
   "require": {
+    "ext-gd": "*",
     "jakoch/phantomjs-installer": "2.1.1-p09",
     "microweber/screen": "v2.0.0.x-dev"
   },
