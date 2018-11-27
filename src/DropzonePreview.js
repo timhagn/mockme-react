@@ -78,16 +78,19 @@ class DropzoneWithPreview extends React.Component {
   }
 
   handleClick = event => {
-    const {
-      deviceName,
-      deviceOrientation,
-    } = this.state
-    // Calculate "responsive" device screen-size.
-    const width = deviceWidth(deviceName, deviceOrientation),
+    event.preventDefault();
+    if (this.urlInput.current.value) {
+      const {
+        deviceName,
+        deviceOrientation,
+      } = this.state
+      // Calculate "responsive" device screen-size.
+      const width = deviceWidth(deviceName, deviceOrientation),
           height = deviceHeight(deviceName, deviceOrientation)
-    const screengrabURI =
-        `http://th_back.web.test/mockme/cs?url=${this.urlInput.current.value}&w=${width}&h=${height}`
-    this.setState({ url: screengrabURI  })
+      const screengrabURI =
+          `http://th_back.web.test/mockme/cs?url=${this.urlInput.current.value}&w=${width}&h=${height}`
+      this.setState({url: screengrabURI})
+    }
   }
 
   componentWillUnmount() {
