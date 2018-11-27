@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains mockme.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function mockme_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the mockme module.
+    case 'help.page.mockme':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('MockMe mock up auto creation module.') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function mockme_theme() {
+  return [
+    'mockme' => [
+      'render element' => 'children',
+    ],
+  ];
+}

@@ -1,0 +1,5 @@
+name: 'MockMe'
+type: module
+description: 'MockMe mock up auto creation module.'
+core: 8.x
+package: 'Custom'

@@ -1,0 +1,124 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "a859f7002c389f20fdb3e1e537d24471",
+    "packages": [
+        {
+            "name": "jakoch/phantomjs-installer",
+            "version": "2.1.1-p09",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jakoch/phantomjs-installer.git",
+                "reference": "41c9fc2608adbc3905338c60829d6e4dd3b739bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jakoch/phantomjs-installer/zipball/41c9fc2608adbc3905338c60829d6e4dd3b739bf",
+                "reference": "41c9fc2608adbc3905338c60829d6e4dd3b739bf",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bz2": "*",
+                "ext-openssl": "*",
+                "php": ">5.3"
+            },
+            "require-dev": {
+                "composer/composer": "^1.2",
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "custom-installer",
+            "autoload": {
+                "psr-4": {
+                    "PhantomInstaller\\Test\\": "tests/"
+                },
+                "psr-0": {
+                    "PhantomInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jens-André Koch",
+                    "email": "jakoch@web.de"
+                }
+            ],
+            "description": "A Composer package which installs the PhantomJS binary (Linux, Windows, Mac) into `/bin` of your project.",
+            "keywords": [
+                "binaries",
+                "headless",
+                "phantomjs"
+            ],
+            "time": "2017-08-16T08:57:05+00:00"
+        },
+        {
+            "name": "microweber/screen",
+            "version": "v2.0.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/microweber/screen.git",
+                "reference": "ae553dffeeba7e5b1d9df054109afdc402dde204"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/microweber/screen/zipball/ae553dffeeba7e5b1d9df054109afdc402dde204",
+                "reference": "ae553dffeeba7e5b1d9df054109afdc402dde204",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/var-dumper": "^3.2"
+            },
+            "suggest": {
+                "jakoch/phantomjs-installer": "Installs the PhantomJS binary (Linux, Windows, Mac)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Screen\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Ivanov",
+                    "email": "peter@microweber.com",
+                    "homepage": "http://microweber.com"
+                },
+                {
+                    "name": "André Filipe",
+                    "email": "andre.r.flip@gmail.com",
+                    "homepage": "http://masnathan.com"
+                }
+            ],
+            "description": "A PHP Class to interact with PhantomJs and capture screenshot of a webpage",
+            "keywords": [
+                "capture",
+                "phantomjs",
+                "print-screen",
+                "screen"
+            ],
+            "time": "2017-03-30T11:20:05+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "microweber/screen": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

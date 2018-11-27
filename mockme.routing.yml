@@ -1,0 +1,8 @@
+
+mockme.mock_me_controller_cs:
+  path: '/mockme/cs'
+  defaults:
+    _controller: '\Drupal\mockme\Controller\MockMeController::createScreenshot'
+    _title: 'createScreenshot'
+  requirements:
+    _permission: 'access content'

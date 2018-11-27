@@ -1,0 +1,34 @@
+{
+  "name": "drupal/mockme",
+  "type": "drupal-module",
+  "description": "MockMe mock up auto creation module.",
+  "keywords": ["Drupal", "MockUp"],
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "timhagn",
+      "email": "mail@timhagn.com"
+    }
+  ],
+  "homepage": "https://www.drupal.org/project/mockme",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/mockme",
+    "source": "http://cgit.drupalcode.org/mockme"
+  },
+  "require": {
+    "jakoch/phantomjs-installer": "2.1.1-p09",
+    "microweber/screen": "v2.0.0.x-dev"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ],
+    "post-update-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+react:
+  js:
+    //unpkg.com/react@16/umd/react.production.min.js:
+      external: true
+    //unpkg.com/react-dom@16/umd/react-dom.production.min.js:
+      external: true
+component:
+  version: VERSION
+  js:
+    js/dist/mockme.js: {}
+  css:
+    component:
+      js/dist/mockme.css: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
