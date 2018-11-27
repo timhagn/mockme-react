@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:dist": "cd build && cat static/js/*.js > ../dist/mockme.js && cat static/css/*.css > ../dist/mockme.css",
+    "build:dist": "cd build && cat static/js/*.js > ../dist/mockme.js && cat static/css/main*.css > ../dist/mockme.css",
     "bd": "yarn build && yarn build:dist",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
