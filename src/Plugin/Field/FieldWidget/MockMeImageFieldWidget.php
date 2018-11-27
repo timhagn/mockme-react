@@ -75,7 +75,7 @@ class MockMeImageFieldWidget extends ImageWidget {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    $element = parent::formElement($items, $delta, $element, $form, $form_state);
+//    $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
     $element['mockme_root']['#markup'] = '<div id="' . $this->mockmeRoot . '"></div>';
     $element['mockme_root']['#attached']['drupalSettings']['mockmeRoot'] = $this->mockmeRoot;

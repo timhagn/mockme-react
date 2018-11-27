@@ -129,14 +129,17 @@ class MockMeController extends ControllerBase {
       }
       else {
         // Try to get OpenGraph / Twitter image.
-        if ($pageOGImage = $this->getOpenGraphImage($snapshotURL) &&
-            !$request->get('noog')) {
+        if (($pageOGImage = $this->getOpenGraphImage($snapshotURL)) &&
+          !$request->get('noog')) {
           $ogImageContent =
             imagecreatefromstring(file_get_contents($pageOGImage));
           imagejpeg($ogImageContent, $snapshotFile, 100);
 
           $imageInfo = getimagesize($snapshotFile);
-          $response = $this->returnImage($snapshotFile, $imageInfo['mime']);
+          if ($imageInfo) {
+            $response = $this->returnImage($snapshotFile, $imageInfo['mime']);
+          }
+          else $response = [];
         }
         else {
           // Else try to create snapshot.

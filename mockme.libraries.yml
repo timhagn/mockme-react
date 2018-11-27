@@ -4,6 +4,22 @@ react:
       external: true
     //unpkg.com/react-dom@16/umd/react-dom.production.min.js:
       external: true
+
+html2canvas:
+  title: 'html2canvas'
+  website: https://html2canvas.hertzen.com/
+  version: 1.0.0-alpha.12
+  js:
+    /libraries/html2canvas/html2canvas.min.js: {}
+
+html5-device-mockups:
+  title: 'html5-device-mockups'
+  website: https://pixelsign.github.io/html5-device-mockups/
+  version: 3.2.1
+  css:
+    base:
+      /libraries/html5-device-mockups/dist/device-mockups.min.css: {}
+
 component:
   version: VERSION
   js:
@@ -14,3 +30,5 @@ component:
   dependencies:
     - core/drupal
     - core/drupalSettings
+    - mockme/html2canvas
+    - mockme/html5-device-mockups
