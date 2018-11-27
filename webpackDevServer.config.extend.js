@@ -14,6 +14,7 @@
  */
 
 module.exports = (webpackDevServerConfig, env, { paths }) => {
-    // here you can extend your webpackDevServerConfig at will
-    return webpackDevServerConfig
+  // here you can extend your webpackDevServerConfig at will
+  webpackDevServerConfig.externals = {}
+  return webpackDevServerConfig
 }

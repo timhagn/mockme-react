@@ -86,7 +86,7 @@ class DropzoneWithPreview extends React.Component {
     const width = deviceWidth(deviceName, deviceOrientation),
           height = deviceHeight(deviceName, deviceOrientation)
     const screengrabURI =
-        `http://localhost/sc/screenshot.php?url=${this.urlInput.current.value}&w=${width}&h=${height}`
+        `http://th_back.web.test/mockme/cs?url=${this.urlInput.current.value}&w=${width}&h=${height}`
     this.setState({ url: screengrabURI  })
   }
 
