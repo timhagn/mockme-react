@@ -15,9 +15,12 @@
 
 module.exports = (webpackConfig, env, { paths }) => {
   // here you can extend your webpackConfig at will
-  webpackConfig.externals = {
-    "react": "React",
-    "react-dom": "ReactDOM"
+  console.log('Environment: ', env)
+  if (env !== 'development') {
+    webpackConfig.externals = {
+      "react": "React",
+      "react-dom": "ReactDOM"
+    }
   }
   return webpackConfig
 }
