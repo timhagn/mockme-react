@@ -79,6 +79,8 @@ class DropzoneWithPreview extends React.Component {
 
   handleClick = event => {
     event.preventDefault();
+    event.stopPropagation();
+    event.nativeEvent.stopImmediatePropagation();
     if (this.urlInput.current.value) {
       const {
         deviceName,
