@@ -3,7 +3,9 @@
 namespace Drupal\mockme\Controller;
 
 use DOMDocument;
+use Psr\Log\LoggerInterface;
 use Screen\Capture;
+use Screen\Exceptions\PhantomJsException;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\File\FileSystemInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -20,16 +22,26 @@ class MockMeController extends ControllerBase {
    */
   private $fileSystem;
 
+  /**
+   * @var \Psr\Log\LoggerInterface
+   */
+  private $logger;
+
   public $snapshotDir = 'public://mockme';
   public $jobsDir = 'public://mockme/jobs';
+
 
   /**
    * MockMeController constructor.
    *
    * @param \Drupal\Core\File\FileSystemInterface $fileSystem
+   * @param \Psr\Log\LoggerInterface $logger
    */
-  public function __construct(FileSystemInterface $fileSystem) {
+  public function __construct(FileSystemInterface $fileSystem,
+                              LoggerInterface $logger) {
      $this->fileSystem = $fileSystem;
+     $this->logger = $logger;
+
   }
 
   /**
@@ -39,7 +51,8 @@ class MockMeController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('file_system')
+      $container->get('file_system'),
+      $container->get('logger.factory')->get('MockMe')
     );
   }
 
@@ -97,7 +110,7 @@ class MockMeController extends ControllerBase {
    * @param \Symfony\Component\HttpFoundation\Request $request
    *
    * @return array|\Symfony\Component\HttpFoundation\Response
-   * @throws \Screen\Exceptions\PhantomJsException
+   * @throws \Exception
    */
   public function createScreenshot(Request $request) {
     if ($snapshotURL = $request->get('url')) {
@@ -127,11 +140,25 @@ class MockMeController extends ControllerBase {
         }
         else {
           // Else try to create snapshot.
-          $screen = new Capture($snapshotURL);
-          $screen->setImageType('jpg');
+          try {
+            $screen = new Capture($snapshotURL);
+            $screen->jobs
+              ->setLocation($this->fileSystem->realpath($this->jobsDir));
+          } catch (\Exception $exception) {
+            if ($exception->getMessage() === "The directory '' does not exist.") {
+              $errorMsg =
+                'Job directory not found, is the public directory writable? - ';
+            }
+            else {
+              $errorMsg =
+                'It seems Screencapture is not possible - have you run composer? - ';
+            }
+            $this->logger->error($errorMsg . $exception->getMessage());
+            return [];
+          }
 
-          $screen->jobs
-            ->setLocation($this->fileSystem->realpath($this->jobsDir));
+          // Set Image Type.
+          $screen->setImageType('jpg');
 
           // Do we have a requested width and / or height?
           if ($width = $request->get('w')) {
@@ -141,8 +168,14 @@ class MockMeController extends ControllerBase {
             $screen->setHeight(intval($height));
           }
 
-          $screen->save($snapshotFile);
+          try {
+            $screen->save($snapshotFile);
+          } catch (PhantomJsException $exception) {
+            $this->logger->error($exception->getMessage());
+            return [];
+          }
 
+          // Return Image.
           $response = $this->returnImage($screen->getImageLocation(),
             $screen->getImageType()->getMimeType());
         }
