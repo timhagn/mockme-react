@@ -21,6 +21,7 @@ module.exports = (webpackConfig, env, { paths }) => {
       "react": "React",
       "react-dom": "ReactDOM",
       "html2canvas": "html2canvas",
+      "html5-device-mockups": "html5-device-mockups",
     }
   }
   return webpackConfig
