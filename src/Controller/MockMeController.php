@@ -20,6 +20,9 @@ class MockMeController extends ControllerBase {
    */
   private $fileSystem;
 
+  public $snapshotDir = 'public://mockme';
+  public $jobsDir = 'public://mockme/jobs';
+
   /**
    * MockMeController constructor.
    *
@@ -98,11 +101,13 @@ class MockMeController extends ControllerBase {
    */
   public function createScreenshot(Request $request) {
     if ($snapshotURL = $request->get('url')) {
-      $snapshotDir = 'public://mockme';
-      file_prepare_directory($snapshotDir, FILE_CREATE_DIRECTORY);
+      file_prepare_directory($this->snapshotDir, FILE_CREATE_DIRECTORY);
+      file_prepare_directory($this->jobsDir, FILE_CREATE_DIRECTORY);
       $snapshotFile =
         $this->fileSystem
-          ->realpath($snapshotDir . DIRECTORY_SEPARATOR . md5($snapshotURL) . '.jpg');
+          ->realpath(
+            $this->snapshotDir . DIRECTORY_SEPARATOR . md5($snapshotURL) . '.jpg'
+          );
 
       // Do we have a cached file and "cache" shall not be reset?
       if (file_exists($snapshotFile) &&
@@ -122,6 +127,8 @@ class MockMeController extends ControllerBase {
           // Else try to create snapshot.
           $screen = new Capture($snapshotURL);
           $screen->setImageType('jpg');
+          $screen->jobs->setLocation($this->fileSystem->realpath($this->jobsDir) . DIRECTORY_SEPARATOR);
+//          $screen->output->setLocation($this->fileSystem->realpath($this->snapshotDir));
 
           // Do we have a requested width and / or height?
           if ($width = $request->get('w')) {
