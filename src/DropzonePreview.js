@@ -78,10 +78,11 @@ class DropzoneWithPreview extends React.Component {
   }
 
   handleClick = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    event.nativeEvent.stopImmediatePropagation();
     if (this.urlInput.current.value) {
+      let grabURL = this.urlInput.current.value
+      if (grabURL.indexOf("?") > 0) {
+        grabURL = grabURL.substring(0, grabURL.indexOf("?"))
+      }
       const {
         deviceName,
         deviceOrientation,
@@ -90,7 +91,7 @@ class DropzoneWithPreview extends React.Component {
       const width = deviceWidth(deviceName, deviceOrientation),
           height = deviceHeight(deviceName, deviceOrientation)
       const screengrabURI =
-          `http://th_back.web.test/mockme/cs?url=${this.urlInput.current.value}&w=${width}&h=${height}`
+          `http://th_back.web.test/mockme/cs?url=${grabURL}&w=${width}&h=${height}`
       this.setState({url: screengrabURI})
     }
   }

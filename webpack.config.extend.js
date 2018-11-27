@@ -19,7 +19,8 @@ module.exports = (webpackConfig, env, { paths }) => {
   if (env !== 'development') {
     webpackConfig.externals = {
       "react": "React",
-      "react-dom": "ReactDOM"
+      "react-dom": "ReactDOM",
+      "html2canvas": "html2canvas",
     }
   }
   return webpackConfig
