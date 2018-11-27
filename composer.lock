@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a859f7002c389f20fdb3e1e537d24471",
+    "content-hash": "b6142b23dfe6aa0feaa24c1137668376",
     "packages": [
         {
             "name": "jakoch/phantomjs-installer",
