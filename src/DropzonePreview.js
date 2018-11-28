@@ -146,8 +146,8 @@ class DropzoneWithPreview extends React.Component {
                         deviceName={this.state.deviceName}
                         deviceOrientation={this.state.deviceOrientation}
                         DEVICES={DEVICES}/>
+            <SizeCombo onChange={this.handleChange('imageSize')} />
           </div>
-          <SizeCombo onChange={this.handleChange('imageSize')} />
           <MockMeUp srcImage={srcFile}
                     deviceName={this.state.deviceName}
                     deviceOrientation={this.state.deviceOrientation}
