@@ -125,7 +125,7 @@ class DropzoneWithPreview extends React.Component {
         : this.state.url ? this.state.url : ''
 
     return (
-        <section>
+        <section className="field--type-image field--name-field-image field--widget-image-image js-form-wrapper form-wrapper">
           <div className="dropzone">
             <Dropzone
                 accept="image/*"
