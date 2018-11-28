@@ -125,7 +125,7 @@ class DropzoneWithPreview extends React.Component {
         : this.state.url ? this.state.url : ''
 
     return (
-        <section className="field--type-image field--name-field-image field--widget-image-image js-form-wrapper form-wrapper">
+        <section>
           <div className="dropzone">
             <Dropzone
                 accept="image/*"
@@ -133,6 +133,9 @@ class DropzoneWithPreview extends React.Component {
                 onDrop={this.onDrop}>
               <p>Drop your image to MockUp here, or click to select.</p>
             </Dropzone>
+            <aside style={thumbsContainer}>
+              {thumbs}
+            </aside>
           </div>
           <CaptureURIInput ref={this.urlInput} onClick={this.handleClick}/>
           <DeviceCombo onChange={this.handleChange('deviceName')}
@@ -146,9 +149,6 @@ class DropzoneWithPreview extends React.Component {
                       deviceOrientation={this.state.deviceOrientation}
                       DEVICES={DEVICES}/>
           <SizeCombo onChange={this.handleChange('imageSize')} />
-          <aside style={thumbsContainer}>
-            {thumbs}
-          </aside>
 
           <MockMeUp srcImage={srcFile}
                     deviceName={this.state.deviceName}

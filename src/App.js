@@ -5,10 +5,8 @@ import DropzoneWithPreview from "./DropzonePreview";
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className="field--type-image field--name-field-image field--widget-image-image js-form-wrapper form-wrapper">
           <DropzoneWithPreview />
-        </header>
       </div>
     );
   }

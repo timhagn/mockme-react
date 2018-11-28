@@ -111,7 +111,6 @@ class MockMeUp extends React.Component {
 
     html2canvas(this.mockupContainer.current, {
       backgroundColor: null,
-      // proxy: `http://localhost/h2cp/html2canvasproxy.php`,
       useCORS: true,
       canvas: this.returnCanvas.current,
     })
@@ -130,9 +129,10 @@ class MockMeUp extends React.Component {
       ...style,
     }
     return (
-        <>
+        <div style={{position: 'relative',}}>
           <canvas ref={this.returnCanvas}
-                  id="mockedme-canvas" />
+                  id="mockedme-canvas"
+                  className="image-style-thumbnail" />
           <div style={{
             position: `absolute`,
             top: -10000,
@@ -144,7 +144,7 @@ class MockMeUp extends React.Component {
                  style={{
                    ...containerStyle,}}></div>
           </div>
-        </>
+        </div>
     );
   }
 }
