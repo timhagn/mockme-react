@@ -10,10 +10,7 @@ export const DeviceCombo = ({onChange, selectedDevice = 'Chromebook', DEVICES}) 
     )
   })
   return (
-      <div className="js-form-item form-item js-form-type-select form-type-select"
-           style={{
-
-           }} >
+      <div className="js-form-item form-item js-form-type-select form-type-select">
         <label htmlFor="mm-orientation-select">Device</label>
         <select className="js-form-item form-item js-form-type-select form-type-select"
                 name="mm-devices-select"
