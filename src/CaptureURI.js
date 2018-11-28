@@ -7,7 +7,7 @@ const CaptureURIInput = React.forwardRef((props, ref) => (
       <label htmlFor="url">URL</label>
       <input ref={ref} type="url" className="js-text-full text-full form-text" name="url"
              placeholder="URL to screenshot" />
-      <button className="js-hide button js-form-submit form-submit" onClick={props.onClick}>Grab Image</button>
+      <button className="button js-form-submit form-submit" onClick={props.onClick}>Grab Image</button>
       {/*<input className="js-hide button js-form-submit form-submit"*/}
              {/*data-drupal-selector="edit-field-image-0-upload-button"*/}
              {/*formNoValidate="formnovalidate" type="submit"*/}
