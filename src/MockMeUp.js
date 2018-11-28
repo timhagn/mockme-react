@@ -123,9 +123,7 @@ class MockMeUp extends React.Component {
       deviceOrientation,
     } = this.fixProps()
 
-    const deviceWidth = DEVICES[deviceName][deviceOrientation].image_width,
-          deviceHeight = DEVICES[deviceName][deviceOrientation].image_height,
-          deviceZoom = deviceHeight > 800 ? `0.5` : `1`;
+    const deviceWidth = DEVICES[deviceName][deviceOrientation].image_width
 
     const containerStyle = {
       minWidth: deviceWidth < 800 ?
@@ -133,14 +131,14 @@ class MockMeUp extends React.Component {
           ...style,
     }
     return (
-        <div style={{position: 'relative',}}>
+        <div style={{maxWidth: `100%`,}}>
           <canvas ref={this.returnCanvas}
                   id="mockedme-canvas"
                   className="image-style-thumbnail"
                   style={{
-                    width: `100%`,
+                    maxWidth: `100%`,
                     height: `auto`,
-                    transform: `scale(${deviceZoom})`,
+                    // transform: `scale(${deviceZoom})`,
                   }}/>
           <div style={{
             position: `absolute`,
