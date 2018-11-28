@@ -113,7 +113,7 @@ class MockMeUp extends React.Component {
       backgroundColor: null,
       useCORS: true,
       canvas: this.returnCanvas.current,
-    })
+    }).then(() => { this.returnCanvas.current.style = {} })
   }
 
   render() {
@@ -134,10 +134,10 @@ class MockMeUp extends React.Component {
         <div style={{maxWidth: `100%`,}}>
           <canvas ref={this.returnCanvas}
                   id="mockedme-canvas"
-                  className="image-style-thumbnail"
+                  className="image-style-thumbnail mm-preview"
                   style={{
                     maxWidth: `100%`,
-                    height: `auto !important`,
+                    height: `auto`,
                   }}/>
           <div style={{
             position: `absolute`,
