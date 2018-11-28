@@ -137,8 +137,7 @@ class MockMeUp extends React.Component {
                   className="image-style-thumbnail"
                   style={{
                     maxWidth: `100%`,
-                    height: `auto`,
-                    // transform: `scale(${deviceZoom})`,
+                    height: `auto !important`,
                   }}/>
           <div style={{
             position: `absolute`,
