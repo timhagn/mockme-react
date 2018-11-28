@@ -15,3 +15,22 @@
   max-width: 100%;
   height: auto;
 }
+
+.dropzone {
+  display: flex;
+  flex-direction: row;
+}
+
+.dropzone > div {
+  margin-right: 1rem;
+}
+
+.dropzone > aside {
+  width: 200px;
+  height: auto;
+}
+
+.mm-devices {
+  display: flex;
+  flex-direction: row;
+}

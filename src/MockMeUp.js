@@ -131,7 +131,7 @@ class MockMeUp extends React.Component {
           ...style,
     }
     return (
-        <div style={{maxWidth: `100%`,}}>
+        <>
           <canvas ref={this.returnCanvas}
                   id="mockedme-canvas"
                   className="image-style-thumbnail mm-preview"
@@ -152,7 +152,7 @@ class MockMeUp extends React.Component {
                  }} >
             </div>
           </div>
-        </div>
+        </>
     );
   }
 }

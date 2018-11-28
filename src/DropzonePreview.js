@@ -14,7 +14,6 @@ const thumbsContainer = {
   display: 'flex',
   flexDirection: 'column',
   flexWrap: 'wrap',
-  marginTop: 16
 };
 
 const thumb = {
@@ -23,22 +22,20 @@ const thumb = {
   border: '1px solid #eaeaea',
   marginBottom: 8,
   marginRight: 8,
-  width: 160,
-  height: 100,
+  height: 200,
   padding: 4,
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
 };
 
 const thumbInner = {
   display: 'flex',
   minWidth: 0,
-  overflow: 'hidden'
 }
 
 const img = {
   display: 'block',
+  height: '100%',
   width: 'auto',
-  height: '100%'
 };
 
 class DropzoneWithPreview extends React.Component {
@@ -125,7 +122,7 @@ class DropzoneWithPreview extends React.Component {
         : this.state.url ? this.state.url : ''
 
     return (
-        <section>
+        <>
           <div className="dropzone">
             <Dropzone
                 accept="image/*"
@@ -138,24 +135,25 @@ class DropzoneWithPreview extends React.Component {
             </aside>
           </div>
           <CaptureURIInput ref={this.urlInput} onClick={this.handleClick}/>
-          <DeviceCombo onChange={this.handleChange('deviceName')}
-                       selectedDevice={this.state.deviceName}
-                       DEVICES={DEVICES} />
-          <OrientationCombo onChange={this.handleChange('deviceOrientation')}
-                            deviceName={this.state.deviceName}
-                            DEVICES={DEVICES} />
-          <ColorCombo onChange={this.handleChange('deviceColor')}
-                      deviceName={this.state.deviceName}
-                      deviceOrientation={this.state.deviceOrientation}
-                      DEVICES={DEVICES}/>
+          <div className="mm-devices">
+            <DeviceCombo onChange={this.handleChange('deviceName')}
+                         selectedDevice={this.state.deviceName}
+                         DEVICES={DEVICES} />
+            <OrientationCombo onChange={this.handleChange('deviceOrientation')}
+                              deviceName={this.state.deviceName}
+                              DEVICES={DEVICES} />
+            <ColorCombo onChange={this.handleChange('deviceColor')}
+                        deviceName={this.state.deviceName}
+                        deviceOrientation={this.state.deviceOrientation}
+                        DEVICES={DEVICES}/>
+          </div>
           <SizeCombo onChange={this.handleChange('imageSize')} />
-
           <MockMeUp srcImage={srcFile}
                     deviceName={this.state.deviceName}
                     deviceOrientation={this.state.deviceOrientation}
                     deviceColor={this.state.deviceColor}
                     mockUpStyle={`background-size: ${this.state.imageSize};`} />
-        </section>
+        </>
     );
   }
 }
