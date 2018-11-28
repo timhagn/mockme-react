@@ -89,7 +89,10 @@ class DropzoneWithPreview extends React.Component {
           height = deviceHeight(deviceName, deviceOrientation)
       const screengrabURI =
           `http://th_back.web.test/mockme/cs?url=${grabURL}&w=${width}&h=${height}`
-      this.setState({url: screengrabURI})
+      this.setState({
+        files: [],
+        url: screengrabURI,
+      })
     }
   }
 
