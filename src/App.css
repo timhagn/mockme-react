@@ -1,16 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 .mm-preview {
   max-width: 100%;
   height: auto;
@@ -32,5 +19,8 @@
 
 .mm-devices {
   display: flex;
-  flex-direction: row;
+}
+
+.mm-devices .form-type-select {
+  margin-right: 0.5rem;
 }
