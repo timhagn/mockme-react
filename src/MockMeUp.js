@@ -12,9 +12,9 @@ const htmlTemplate = `
        data-color="{mockup-color}">
     <div class="screen" style="{screen-style}">
     </div>
-    <div class="button">
-      {link}
-    </div>
+    <!--<div class="button">-->
+      <!--{link}-->
+    <!--</div>-->
   </div>
 </div>
 `
@@ -123,16 +123,25 @@ class MockMeUp extends React.Component {
       deviceOrientation,
     } = this.fixProps()
 
+    const deviceWidth = DEVICES[deviceName][deviceOrientation].image_width,
+          deviceHeight = DEVICES[deviceName][deviceOrientation].image_height,
+          deviceZoom = deviceHeight > 800 ? `0.5` : `1`;
+
     const containerStyle = {
-      minWidth: DEVICES[deviceName][deviceOrientation].image_width < 800 ?
-          `${DEVICES[deviceName][deviceOrientation].image_width}px` : `800px`,
-      ...style,
+      minWidth: deviceWidth < 800 ?
+          `${deviceWidth}px` : `800px`,
+          ...style,
     }
     return (
         <div style={{position: 'relative',}}>
           <canvas ref={this.returnCanvas}
                   id="mockedme-canvas"
-                  className="image-style-thumbnail" />
+                  className="image-style-thumbnail"
+                  style={{
+                    width: `100%`,
+                    height: `auto`,
+                    transform: `scale(${deviceZoom})`,
+                  }}/>
           <div style={{
             position: `absolute`,
             top: -10000,
@@ -142,7 +151,9 @@ class MockMeUp extends React.Component {
             <div ref={this.mockupContainer}
                  id="mockup"
                  style={{
-                   ...containerStyle,}}></div>
+                   ...containerStyle,
+                 }} >
+            </div>
           </div>
         </div>
     );
