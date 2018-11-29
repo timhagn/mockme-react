@@ -116,7 +116,11 @@ class MockMeUp extends React.Component {
       canvas: this.returnCanvas.current,
     }).then(() => {
       this.returnCanvas.current.style = {}
-      // if (drupalSettings.hasOwnProperty(''))
+      if (drupalSettings.hasOwnProperty('fieldName')) {
+          document
+              .querySelector(`input[name="${drupalSettings.fieldName}[0][mockme_root][mockme_hidden]"]`)
+              .value = this.returnCanvas.current.toDataURL()
+      }
     })
   }
 
