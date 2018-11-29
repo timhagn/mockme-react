@@ -155,7 +155,8 @@ class DropzoneWithPreview extends React.Component {
                     deviceName={this.state.deviceName}
                     deviceOrientation={this.state.deviceOrientation}
                     deviceColor={this.state.deviceColor}
-                    mockUpStyle={`background-size: ${this.state.imageSize};`} />
+                    mockUpStyle={`background-size: ${this.state.imageSize};`}
+                    drupalSettings={this.props.drupalSettings} />
         </>
     );
   }

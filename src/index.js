@@ -9,7 +9,7 @@ const drupalSettings = typeof window.drupalSettings !== 'undefined' ?
 const rootElement = drupalSettings.hasOwnProperty('mockmeRoot') ?
     drupalSettings.mockmeRoot : 'mockme-root'
 
-ReactDOM.render(<App props={drupalSettings}/>, document.getElementById(rootElement))
+ReactDOM.render(<App drupalSettings={drupalSettings}/>, document.getElementById(rootElement))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

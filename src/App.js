@@ -10,7 +10,7 @@ class App extends Component {
            style={{
              marginBottom: `2rem`,
            }}>
-          <DropzoneWithPreview />
+          <DropzoneWithPreview drupalSettings={this.props.drupalSettings} />
       </div>
     );
   }

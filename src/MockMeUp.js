@@ -92,6 +92,7 @@ class MockMeUp extends React.Component {
       deviceInnerWidth = 'min-width: 100%;',
       deviceColor = 'black',
       mockUpStyle,
+      drupalSettings,
     } = this.fixProps()
 
     const screenStyle = mockupImage === '' ? {} : `
@@ -113,7 +114,10 @@ class MockMeUp extends React.Component {
       backgroundColor: null,
       useCORS: true,
       canvas: this.returnCanvas.current,
-    }).then(() => { this.returnCanvas.current.style = {} })
+    }).then(() => {
+      this.returnCanvas.current.style = {}
+      // if (drupalSettings.hasOwnProperty(''))
+    })
   }
 
   render() {
