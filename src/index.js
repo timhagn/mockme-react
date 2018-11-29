@@ -4,10 +4,12 @@ import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-const rootElement = typeof window.drupalSettings !== 'undefined' ?
-    window.drupalSettings.mockmeRoot : 'mockme-root'
+const drupalSettings = typeof window.drupalSettings !== 'undefined' ?
+    window.drupalSettings : {}
+const rootElement = drupalSettings.hasOwnProperty('mockmeRoot') ?
+    drupalSettings.mockmeRoot : 'mockme-root'
 
-ReactDOM.render(<App />, document.getElementById(rootElement))
+ReactDOM.render(<App props={drupalSettings}/>, document.getElementById(rootElement))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

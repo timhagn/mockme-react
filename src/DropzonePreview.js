@@ -107,7 +107,7 @@ class DropzoneWithPreview extends React.Component {
 
   render() {
     const {files} = this.state;
-
+    console.log('settingsDropzone', this.props.drupalSettings)
     const thumbs = files.map((file, index) => (
         <div style={thumb} key={`img-file-${index}`}>
           <div style={thumbInner}>
