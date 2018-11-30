@@ -27,8 +27,10 @@ class MockMe {
     ReactDOM.unmountComponentAtNode(this._container);
   }
 }
-
-ReactDOM.render(<App drupalSettings={drupalSettings}/>, document.getElementById(rootElement))
+const rootContainer = document.getElementById(rootElement)
+if (rootContainer) {
+  ReactDOM.render(<App drupalSettings={drupalSettings}/>, rootContainer)
+}
 
 window.RenderMockMe = MockMe
 export default MockMe
