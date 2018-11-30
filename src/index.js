@@ -9,12 +9,29 @@ const drupalSettings = typeof window.drupalSettings !== 'undefined' ?
 const rootElement = drupalSettings.hasOwnProperty('mockmeRoot') ?
     drupalSettings.mockmeRoot : 'mockme-root'
 
-const reactNodes =
-    ReactDOM.render(<App drupalSettings={drupalSettings}/>, document.getElementById(rootElement))
+class MockMe {
+  constructor(container, settings = {}) {
+    this._container = container;
+    this._settings = settings;
+    this._render();
+  }
 
-if (drupalSettings.hasOwnProperty('mockmeRoot')) {
-  drupalSettings.mockmeReact = reactNodes
+  _render() {
+    ReactDOM.render(
+        <App drupalSettings={this._settings}/>,
+        this._container
+    );
+  }
+
+  destroy() {
+    ReactDOM.unmountComponentAtNode(this._container);
+  }
 }
+
+ReactDOM.render(<App drupalSettings={drupalSettings}/>, document.getElementById(rootElement))
+
+export default MockMe
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
