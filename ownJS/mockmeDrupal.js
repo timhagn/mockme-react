@@ -1,14 +1,12 @@
-(function($, Drupal)
-{
+(function($, Drupal) {
   Drupal.behaviors.mockme = {
     attach: function (context, settings) {
-      const $container = document.getElementById(settings.mockmeRoot);
-      if (typeof window.mockmeRenderer !== 'undefined') {
-        window.mockmeRenderer.reRender($container);
-      }
-      else if (typeof renderMockMe !== 'undefined') {
-        const $mockmeRenderer = new renderMockMe($container, settings);
-        window.mockmeRenderer = $mockmeRenderer;
+      console.log(context === document, context.valueOf());
+      if (context.toString() === '[object HTMLFormElement]') {
+        const $container = document.getElementById(settings.mockmeRoot);
+        if ($container && typeof RenderMockMe !== 'undefined') {
+          new RenderMockMe($container, settings);
+        }
       }
     }
   };
