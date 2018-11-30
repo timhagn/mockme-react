@@ -2,3 +2,7 @@
 vendor/
 bin/
 
+# Own scripts
+gp
+
+
