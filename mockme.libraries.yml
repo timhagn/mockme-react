@@ -32,3 +32,12 @@ component:
     - core/drupalSettings
     - mockme/html2canvas
     - mockme/html5-device-mockups
+
+mockme:
+  version: VERSION
+  js:
+    ownJS/mockmeDrupal.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery
