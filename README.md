@@ -69,4 +69,11 @@ Now you only have to download the libraries into your folder of the same name:
    `libraries/html5-device-mockups`.
    
 **Now you can change the ImageWidget in a Content Type to a "MockMe Image" widget!**
-    
+
+
+
+#### TODO:
+- add some settings to the widget
+- add tests
+- ...
+- create Project on drupal.org...
