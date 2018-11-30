@@ -4,7 +4,7 @@ namespace Drupal\mockme\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\image\Plugin\Field\FieldWidget\ImageWidget as CoreImageWidget;
+use Drupal\image\Plugin\Field\FieldWidget\ImageWidget;
 
 /**
  * Plugin implementation of the 'mockme_image_field_widget' widget.
@@ -17,7 +17,7 @@ use Drupal\image\Plugin\Field\FieldWidget\ImageWidget as CoreImageWidget;
  *   }
  * )
  */
-class ImageWidget extends CoreImageWidget {
+class MockMeWidget extends ImageWidget {
 
   /**
    * @var string  React Root.
