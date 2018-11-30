@@ -23,7 +23,10 @@ class MockMe {
     );
   }
 
-  reRender() {
+  reRender(container = this._container) {
+    if (container !== this._container) {
+      this._container = container
+    }
     this._render();
   }
 
@@ -34,7 +37,7 @@ class MockMe {
 
 ReactDOM.render(<App drupalSettings={drupalSettings}/>, document.getElementById(rootElement))
 
-window.renderMockMe = MockMe
+window.RenderMockMe = MockMe
 export default MockMe
 
 // If you want your app to work offline and load faster, you can change
