@@ -2,4 +2,8 @@ name: 'MockMe'
 type: module
 description: 'MockMe mock up auto creation module.'
 core: 8.x
-package: 'Custom'
+package: 'MockMe Widget'
+
+dependencies:
+  - drupal:file
+  - drupal:image
