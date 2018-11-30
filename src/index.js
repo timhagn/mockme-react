@@ -23,13 +23,6 @@ class MockMe {
     );
   }
 
-  reRender(container = this._container) {
-    if (container !== this._container) {
-      this._container = container
-    }
-    this._render();
-  }
-
   destroy() {
     ReactDOM.unmountComponentAtNode(this._container);
   }
