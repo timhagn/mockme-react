@@ -6,13 +6,14 @@ import * as serviceWorker from './serviceWorker'
 import { getEnvVariables } from './HelperFunctions'
 
 const envSettings = getEnvVariables()
-const mockmeSettings = envSettings ? envSettings :
-    typeof window.drupalSettings !== 'undefined' &&
+const mockmeSettings = typeof window.drupalSettings !== 'undefined' &&
     window.drupalSettings.hasOwnProperty('mockmeSettings') ?
-    window.drupalSettings.mockmeSettings : {}
+    window.drupalSettings.mockmeSettings
+    : envSettings ? envSettings : {}
 const rootElement = mockmeSettings.hasOwnProperty('mockmeRoot') ?
     mockmeSettings.mockmeRoot : 'mockme-root'
-console.log(mockmeSettings)
+console.log(typeof window.drupalSettings !== 'undefined' &&
+    window.drupalSettings.hasOwnProperty('mockmeSettings'), window.drupalSettings)
 class MockMe {
   constructor(container, settings = {}) {
     this._container = container;
