@@ -111,7 +111,7 @@ class DropzoneWithPreview extends React.Component {
 
   render() {
     const {files} = this.state;
-    console.log('settingsDropzone', this.props.mockmeSettings)
+    // console.log('settingsDropzone', this.props.mockmeSettings)
     const thumbs = files.map((file, index) => (
         <div style={thumb} key={`img-file-${index}`}>
           <div style={thumbInner}>

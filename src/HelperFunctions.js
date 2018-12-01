@@ -3,7 +3,7 @@
  * @return {{mockmeRoot: string, fieldName: string}}
  */
 export const getEnvVariables = () => {
-  console.log(process.env)
+  // console.log(process.env)
   return ({
     mockmeRoot: process.env.REACT_APP_MOCKME_ROOT
         ? process.env.REACT_APP_MOCKME_ROOT

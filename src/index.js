@@ -12,7 +12,7 @@ const mockmeSettings = envSettings ? envSettings :
     window.drupalSettings.mockmeSettings : {}
 const rootElement = mockmeSettings.hasOwnProperty('mockmeRoot') ?
     mockmeSettings.mockmeRoot : 'mockme-root'
-console.log(mockmeSettings)
+// console.log(mockmeSettings)
 class MockMe {
   constructor(container, settings = {}) {
     this._container = container;
