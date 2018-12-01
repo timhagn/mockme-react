@@ -93,7 +93,7 @@ class DropzoneWithPreview extends React.Component {
 
       const screengrabURI =
           `${this.props.mockmeSettings.sgEndpoint}?url=${grabURL}&w=${width}&h=${height}`
-      console.log(screengrabURI)
+      // console.log(screengrabURI)
       this.setState({
         files: [],
         url: screengrabURI,
