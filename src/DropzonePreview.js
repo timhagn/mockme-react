@@ -73,9 +73,12 @@ class DropzoneWithPreview extends React.Component {
     }
     return this.handlers[name]
   }
-
+  /**
+   * Handles the click on 'Grab Screenshot' Button.
+   * @param event
+   */
   handleClick = event => {
-    if (this.urlInput.current.value) {
+    if (this.props.mockmeSettings.sgEndpoint && this.urlInput.current.value) {
       let grabURL = this.urlInput.current.value
       if (grabURL.indexOf("?") > 0) {
         grabURL = grabURL.substring(0, grabURL.indexOf("?"))
@@ -86,9 +89,10 @@ class DropzoneWithPreview extends React.Component {
       } = this.state
       // Calculate "responsive" device screen-size.
       const width = deviceWidth(deviceName, deviceOrientation),
-          height = deviceHeight(deviceName, deviceOrientation)
+            height = deviceHeight(deviceName, deviceOrientation)
+
       const screengrabURI =
-          `http://th_back.web.test/mockme/cs?url=${grabURL}&w=${width}&h=${height}`
+          `${this.props.mockmeSettings.sgEndpoint}?url=${grabURL}&w=${width}&h=${height}`
       this.setState({
         files: [],
         url: screengrabURI,
@@ -107,7 +111,7 @@ class DropzoneWithPreview extends React.Component {
 
   render() {
     const {files} = this.state;
-    // console.log('settingsDropzone', this.props.drupalSettings)
+    console.log('settingsDropzone', this.props.mockmeSettings)
     const thumbs = files.map((file, index) => (
         <div style={thumb} key={`img-file-${index}`}>
           <div style={thumbInner}>
@@ -137,7 +141,9 @@ class DropzoneWithPreview extends React.Component {
               {thumbs}
             </aside>
           </div>
-          <CaptureURIInput ref={this.urlInput} onClick={this.handleClick}/>
+          {this.props.mockmeSettings.sgEndpoint ?
+            <CaptureURIInput ref={this.urlInput} onClick={this.handleClick}/>
+          : ''}
           <div className="mm-devices">
             <DeviceCombo onChange={this.handleChange('deviceName')}
                          selectedDevice={this.state.deviceName}
@@ -156,7 +162,7 @@ class DropzoneWithPreview extends React.Component {
                     deviceOrientation={this.state.deviceOrientation}
                     deviceColor={this.state.deviceColor}
                     mockUpStyle={`background-size: ${this.state.imageSize};`}
-                    drupalSettings={this.props.drupalSettings} />
+                    mockmeSettings={this.props.mockmeSettings} />
         </>
     );
   }

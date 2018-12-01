@@ -6,7 +6,12 @@ This _**first draft of a**_ tool was quickly thrown together with help from:
 * [html5-device-mockups](https://github.com/pixelsign/html5-device-mockups)
 * [html2canvas](http://html2canvas.hertzen.com/)
 
-and will be built into a React Module & a Drupal one.
+And have a look at [screen](https://github.com/microweber/screen/tree/v2.0.0),
+if you want to take screenshots of external websites.
+
+Meanwhile, the Drupal module [MockMe Widget](https://github.com/timhagn/mockme)
+is built and the React Module, ready for npmjs will (hopefully) follow shortly.
+
 
 ## Available Devices
 

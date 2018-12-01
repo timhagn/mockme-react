@@ -92,7 +92,7 @@ class MockMeUp extends React.Component {
       deviceInnerWidth = 'min-width: 100%;',
       deviceColor = 'black',
       mockUpStyle,
-      drupalSettings,
+      mockmeSettings,
     } = this.fixProps()
 
     const screenStyle = mockupImage === '' ? {} : `
@@ -117,9 +117,13 @@ class MockMeUp extends React.Component {
     }).then(() => {
       if (this.returnCanvas.current) {
         this.returnCanvas.current.style = {}
-        if (drupalSettings.hasOwnProperty('fieldName')) {
-          const hiddenMockMeField = document
-              .querySelector(`input[name="${drupalSettings.fieldName}[0][mockme_root][mockme_hidden]"]`)
+        if (mockmeSettings.hasOwnProperty('fieldName')) {
+          const hiddenMockMeField = mockmeSettings.hasOwnProperty('drupal')
+              ? document
+                  .querySelector(`input[name="${mockmeSettings.fieldName}`
+                      + `[0][mockme_root][mockme_hidden]"]`)
+              : document
+                  .querySelector(`input[name="${mockmeSettings.fieldName}"]`)
           if (hiddenMockMeField) {
             hiddenMockMeField.value = this.returnCanvas.current.toDataURL()
           }

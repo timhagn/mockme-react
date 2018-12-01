@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import { getEnvVariables } from './HelperFunctions'
 
-const drupalSettings = typeof window.drupalSettings !== 'undefined' ?
-    window.drupalSettings : {}
-const rootElement = drupalSettings.hasOwnProperty('mockmeRoot') ?
-    drupalSettings.mockmeRoot : 'mockme-root'
-
+const envSettings = getEnvVariables()
+const mockmeSettings = envSettings ? envSettings :
+    typeof window.drupalSettings !== 'undefined' &&
+    window.drupalSettings.hasOwnProperty('mockmeSettings') ?
+    window.drupalSettings.mockmeSettings : {}
+const rootElement = mockmeSettings.hasOwnProperty('mockmeRoot') ?
+    mockmeSettings.mockmeRoot : 'mockme-root'
+console.log(mockmeSettings)
 class MockMe {
   constructor(container, settings = {}) {
     this._container = container;
@@ -18,7 +22,7 @@ class MockMe {
 
   _render() {
     ReactDOM.render(
-        <App drupalSettings={this._settings}/>,
+        <App mockmeSettings={this._settings}/>,
         this._container
     );
   }
@@ -29,7 +33,7 @@ class MockMe {
 }
 const rootContainer = document.getElementById(rootElement)
 if (rootContainer) {
-  ReactDOM.render(<App drupalSettings={drupalSettings}/>, rootContainer)
+  ReactDOM.render(<App mockmeSettings={mockmeSettings}/>, rootContainer)
 }
 
 window.RenderMockMe = MockMe
