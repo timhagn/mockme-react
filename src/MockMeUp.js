@@ -122,7 +122,7 @@ class MockMeUp extends React.Component {
           const hiddenMockMeField = mockmeSettings.hasOwnProperty('drupal')
               ? document
                   .querySelector(`input[name="${mockmeSettings.fieldName}`
-                      + `[0][mockme_root][mockme_hidden]"]`)
+                      + `[0][mockme_hidden]"]`)
               : document
                   .querySelector(`input[name="${mockmeSettings.fieldName}"]`)
           console.log(hiddenMockMeField)
