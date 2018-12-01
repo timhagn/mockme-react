@@ -117,8 +117,8 @@ class MockMeUp extends React.Component {
     }).then(() => {
       if (this.returnCanvas.current) {
         this.returnCanvas.current.style = {}
+        console.log(mockmeSettings)
         if (mockmeSettings.hasOwnProperty('fieldName')) {
-          console.log(mockmeSettings)
           const hiddenMockMeField = mockmeSettings.hasOwnProperty('drupal')
               ? document
                   .querySelector(`input[name="${mockmeSettings.fieldName}`
