@@ -139,7 +139,16 @@ class DropzoneWithPreview extends React.Component {
   }
 
   render() {
-    const {files} = this.state;
+    const {
+      files,
+      noogOption,
+      resetOption,
+      deviceName,
+      deviceOrientation,
+      deviceColor,
+      imageSize,
+    } = this.state
+
     // console.log('settingsDropzone', this.state)
     const thumbs = files.map((file, index) => (
         <div style={thumb} key={`img-file-${index}`}>
@@ -178,32 +187,32 @@ class DropzoneWithPreview extends React.Component {
                   <Check onChange={this.handleChecked(`noog`)}
                          name={`noog`}
                          label="No OpenGraph"
-                         isChecked={this.state.noogOption} />
+                         isChecked={noogOption} />
                   <Check onChange={this.handleChecked(`reset`)}
                          name={`reset`}
                          label="Reset Image"
-                         isChecked={this.state.resetOption} />
+                         isChecked={resetOption} />
                 </div>
               </>
           }
           <div className="mm-devices">
             <DeviceCombo onChange={this.handleChange('deviceName')}
-                         selectedDevice={this.state.deviceName}
+                         selectedDevice={deviceName}
                          DEVICES={DEVICES} />
             <OrientationCombo onChange={this.handleChange('deviceOrientation')}
-                              deviceName={this.state.deviceName}
+                              deviceName={deviceName}
                               DEVICES={DEVICES} />
             <ColorCombo onChange={this.handleChange('deviceColor')}
-                        deviceName={this.state.deviceName}
-                        deviceOrientation={this.state.deviceOrientation}
+                        deviceName={deviceName}
+                        deviceOrientation={deviceOrientation}
                         DEVICES={DEVICES}/>
             <SizeCombo onChange={this.handleChange('imageSize')} />
           </div>
           <MockMeUp srcImage={srcFile}
-                    deviceName={this.state.deviceName}
-                    deviceOrientation={this.state.deviceOrientation}
-                    deviceColor={this.state.deviceColor}
-                    mockUpStyle={`background-size: ${this.state.imageSize};`}
+                    deviceName={deviceName}
+                    deviceOrientation={deviceOrientation}
+                    deviceColor={deviceColor}
+                    mockUpStyle={`background-size: ${imageSize};`}
                     mockmeSettings={this.props.mockmeSettings} />
         </>
     );
