@@ -15,7 +15,6 @@ const Check = ({ onChange,
                  name,
                  label,
                  isChecked = false }) => {
-  const checkString = isChecked && `checked="checked"`
   const checkboxName = `mm-checkbox-${name}`
   return (
       <div className="js-form-item form-item js-form-type-checkbox form-type-checkbox">
@@ -24,7 +23,7 @@ const Check = ({ onChange,
                name={checkboxName}
                type="checkbox"
                onChange={onChange}
-               {...checkString} />
+               checked={isChecked} />
       </div>
   )
 }
