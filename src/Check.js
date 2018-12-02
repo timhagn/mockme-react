@@ -12,16 +12,16 @@ import PropTypes from 'prop-types'
  * @constructor
  */
 const Check = ({ onChange,
-                    name,
-                    label,
-                    checked = false }) => {
-  console.log(name, label, checked)
-  const checkString = checked ? `checked="checked"` : ``
+                 name,
+                 label,
+                 isChecked = false }) => {
+  const checkString = isChecked && `checked="checked"`
+  const checkboxName = `mm-checkbox-${name}`
   return (
       <div className="js-form-item form-item js-form-type-checkbox form-type-checkbox">
-        <label htmlFor={`mm-checkbox-${name}`}>{label}</label>
+        <label htmlFor={checkboxName}>{label}</label>
         <input className="form-checkbox"
-               name={`mm-checkbox-${name}`}
+               name={checkboxName}
                type="checkbox"
                onChange={onChange}
                {...checkString} />
@@ -34,7 +34,7 @@ Check.propTypes = {
   onChange: PropTypes.func.isRequired,
   name: PropTypes.string,
   label: PropTypes.string,
-  checked: PropTypes.bool,
+  isChecked: PropTypes.bool,
 }
 
 export default Check

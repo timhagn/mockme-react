@@ -49,8 +49,8 @@ class DropzoneWithPreview extends React.Component {
       deviceColor: DEVICES['Chromebook']['portrait'].color[0],
       imageSize: 'contain',
       url: '',
-      noog: false,
-      reset: false,
+      noogOption: false,
+      resetOption: false,
     };
     this.handlers = [];
     this.urlInput = React.createRef()
@@ -90,8 +90,8 @@ class DropzoneWithPreview extends React.Component {
   handleChecked = name => {
     if (!this.handlers[name]) {
       this.handlers[name] = event => {
-        console.log(name)
-        this.setState({ [name]: event.target.checked })
+        // console.log(name + `Option`)
+        this.setState({ [name + `Option`]: event.target.checked })
       };
     }
     return this.handlers[name]
@@ -117,13 +117,14 @@ class DropzoneWithPreview extends React.Component {
 
       const screengrabURI =
           `${this.props.mockmeSettings.sgEndpoint}?url=${grabURL}&w=${width}&h=${height}`
-        + `${this.state.noog ? `&noog=true` : ``}`
+        + `${this.state.noogOption ? `&noog=true` : ``}`
+        + `${this.state.resetOption ? `&reset=true` : ``}`
 
       // console.log(screengrabURI)
       this.setState({
         files: [],
         url: screengrabURI,
-        reset: false,
+        resetOption: false,
       })
     }
   }
@@ -169,22 +170,22 @@ class DropzoneWithPreview extends React.Component {
               {thumbs}
             </aside>
           </div>
-          {this.props.mockmeSettings.sgEndpoint ?
+          {this.props.mockmeSettings.sgEndpoint &&
               <>
                 <CaptureURIInput ref={this.urlInput}
                                  onClick={this.handleClick} />
                 <div className="mm-options">
-                  <Check onChange={this.handleChecked('noog')}
+                  <Check onChange={this.handleChecked(`noog`)}
                          name={`noog`}
                          label="No OpenGraph"
-                         checked={this.state.noog} />
-                  <Check onChange={this.handleChecked('reset')}
+                         isChecked={this.state.noogOption} />
+                  <Check onChange={this.handleChecked(`reset`)}
                          name={`reset`}
                          label="Reset Image"
-                         checked={this.state.reset} />
+                         isChecked={this.state.resetOption} />
                 </div>
               </>
-          : ''}
+          }
           <div className="mm-devices">
             <DeviceCombo onChange={this.handleChange('deviceName')}
                          selectedDevice={this.state.deviceName}
