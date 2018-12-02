@@ -8,7 +8,8 @@ import {
   OrientationCombo,
   SizeCombo
 } from './ComboComponents'
-import CaptureURIInput from "./CaptureURI";
+import CaptureURIInput from './CaptureURI'
+import Check from './Check'
 
 const thumbsContainer = {
   display: 'flex',
@@ -48,6 +49,8 @@ class DropzoneWithPreview extends React.Component {
       deviceColor: DEVICES['Chromebook']['portrait'].color[0],
       imageSize: 'contain',
       url: '',
+      noog: false,
+      reset: false,
     };
     this.handlers = [];
     this.urlInput = React.createRef()
@@ -65,6 +68,11 @@ class DropzoneWithPreview extends React.Component {
     });
   }
 
+  /**
+   * Automatically handle dropdowns.
+   * @param name
+   * @return {*}
+   */
   handleChange = name => {
     if (!this.handlers[name]) {
       this.handlers[name] = event => {
@@ -73,6 +81,22 @@ class DropzoneWithPreview extends React.Component {
     }
     return this.handlers[name]
   }
+
+  /**
+   * Handle checkboxes.
+   * @param name
+   * @return {*}
+   */
+  handleChecked = name => {
+    if (!this.handlers[name]) {
+      this.handlers[name] = event => {
+        console.log(name)
+        this.setState({ [name]: event.target.checked })
+      };
+    }
+    return this.handlers[name]
+  }
+
   /**
    * Handles the click on 'Grab Screenshot' Button.
    * @param event
@@ -93,10 +117,13 @@ class DropzoneWithPreview extends React.Component {
 
       const screengrabURI =
           `${this.props.mockmeSettings.sgEndpoint}?url=${grabURL}&w=${width}&h=${height}`
+        + `${this.state.noog ? `&noog=true` : ``}`
+
       // console.log(screengrabURI)
       this.setState({
         files: [],
         url: screengrabURI,
+        reset: false,
       })
     }
   }
@@ -112,7 +139,7 @@ class DropzoneWithPreview extends React.Component {
 
   render() {
     const {files} = this.state;
-    // console.log('settingsDropzone', this.props.mockmeSettings)
+    // console.log('settingsDropzone', this.state)
     const thumbs = files.map((file, index) => (
         <div style={thumb} key={`img-file-${index}`}>
           <div style={thumbInner}>
@@ -143,7 +170,20 @@ class DropzoneWithPreview extends React.Component {
             </aside>
           </div>
           {this.props.mockmeSettings.sgEndpoint ?
-            <CaptureURIInput ref={this.urlInput} onClick={this.handleClick}/>
+              <>
+                <CaptureURIInput ref={this.urlInput}
+                                 onClick={this.handleClick} />
+                <div className="mm-options">
+                  <Check onChange={this.handleChecked('noog')}
+                         name={`noog`}
+                         label="No OpenGraph"
+                         checked={this.state.noog} />
+                  <Check onChange={this.handleChecked('reset')}
+                         name={`reset`}
+                         label="Reset Image"
+                         checked={this.state.reset} />
+                </div>
+              </>
           : ''}
           <div className="mm-devices">
             <DeviceCombo onChange={this.handleChange('deviceName')}

@@ -11,7 +11,7 @@ export const DeviceCombo = ({onChange, selectedDevice = 'Chromebook', DEVICES}) 
   })
   return (
       <div className="js-form-item form-item js-form-type-select form-type-select">
-        <label htmlFor="mm-orientation-select">Device</label>
+        <label htmlFor="mm-devices-select">Device</label>
         <select className="js-form-item form-item js-form-type-select form-type-select"
                 name="mm-devices-select"
                 id="devices"
@@ -70,7 +70,7 @@ export const ColorCombo = ({deviceName, deviceOrientation, onChange, DEVICES}) =
 
 export const SizeCombo = ({onChange}) => (
     <div className="js-form-item form-item js-form-type-select form-type-select">
-      <label htmlFor="mm-color-select">MockUp screen size</label>
+      <label htmlFor="mm-size-select">MockUp screen size</label>
       <select className="js-form-item form-item js-form-type-select form-type-select"
               name="mm-size-select"
               id="size"

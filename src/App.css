@@ -18,7 +18,7 @@
   height: auto;
 }
 
-.mm-devices {
+.mm-devices, .mm-options {
   display: flex;
 }
 
