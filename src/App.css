@@ -22,6 +22,7 @@
   display: flex;
 }
 
-.mm-devices .form-type-select {
+.mm-devices .form-type-select,
+.mm-options .form-checkbox {
   margin-right: 0.5rem;
 }
