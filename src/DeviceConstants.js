@@ -328,6 +328,8 @@ const DEVICES = {
       button_right: 1075,
       button_bottom: 187,
       bottom_left: 385,
+      screen_width: 750,
+      screen_height: 1334,
     },
   },
   'iPhone7Hand': {
@@ -562,6 +564,8 @@ const DEVICES = {
       button_right: 0,
       button_bottom: 0,
       bottom_left: 0,
+      screen_width: 1366,
+      screen_height: 768,
     },
   },
   'HtcOneM8': {
