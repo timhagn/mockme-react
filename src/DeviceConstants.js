@@ -17,6 +17,8 @@ const DEVICES = {
       button_right: 323,
       button_bottom: 58,
       bottom_left: 322,
+      screen_width: 720,
+      screen_height: 1280,
     },
     'landscape':{
       orientation: 'landscape',
@@ -31,6 +33,8 @@ const DEVICES = {
       button_right: 53,
       button_bottom: 322,
       bottom_left: 1514,
+      screen_width: 1280,
+      screen_height: 720,
     },
   },
   'galaxyS5': {
@@ -46,6 +50,8 @@ const DEVICES = {
       button_right: 474,
       button_bottom: 87,
       bottom_left: 479,
+      screen_width: 1080,
+      screen_height: 1920,
     },
     'landscape': {
       color: ['black', 'white', 'gold',],
@@ -59,6 +65,8 @@ const DEVICES = {
       button_right: 87,
       button_bottom: 479,
       bottom_left: 2210,
+      screen_width: 1920,
+      screen_height: 1080,
     },
   },
   'galaxyTab4': {
@@ -89,6 +97,8 @@ const DEVICES = {
       button_right: 0,
       button_bottom: 0,
       bottom_left: 0,
+      screen_width: 768,
+      screen_height: 1024,
     },
   },
   'iPad': {
@@ -104,6 +114,8 @@ const DEVICES = {
       button_right: 523,
       button_bottom: 34,
       bottom_left: 526,
+      screen_width: 1024,
+      screen_height: 768,
     },
     'landscape': {
       color: ['black', 'white',],
@@ -132,6 +144,8 @@ const DEVICES = {
       button_right: 828,
       button_bottom: 50,
       bottom_left: 827,
+      screen_width: 1536,
+      screen_height: 2048,
     },
     'landscape': {
       color: ['black', 'white', 'gold',],
@@ -145,6 +159,8 @@ const DEVICES = {
       button_right: 50,
       button_bottom: 827,
       bottom_left: 2336,
+      screen_width: 2048,
+      screen_height: 1536,
     },
   },
   'iPadPro': {
@@ -160,6 +176,8 @@ const DEVICES = {
       button_right: 1091,
       button_bottom: 49,
       bottom_left: 1092,
+      screen_width: 2048,
+      screen_height: 2732,
     },
     'landscape': {
       color: ['black', 'white', 'gold',],
@@ -173,6 +191,8 @@ const DEVICES = {
       button_right: 49,
       button_bottom: 1092,
       bottom_left: 3019,
+      screen_width: 2732,
+      screen_height:2048,
     },
   },
   'iPhone6': {
@@ -188,6 +208,8 @@ const DEVICES = {
       button_right: 354,
       button_bottom: 47,
       bottom_left: 357,
+      screen_width: 750,
+      screen_height: 1334,
     },
     'landscape': {
       color: ['black', 'white', 'gold',],
@@ -201,6 +223,8 @@ const DEVICES = {
       button_right: 47,
       button_bottom: 357,
       bottom_left: 1582,
+      screen_width: 1334,
+      screen_height: 750,
     },
   },
   'iPhone6Plus': {
@@ -216,6 +240,8 @@ const DEVICES = {
       button_right: 537,
       button_bottom: 73,
       bottom_left: 537,
+      screen_width: 1080,
+      screen_height: 1920,
     },
     'landscape': {
       color: ['black', 'white', 'gold',],
@@ -229,6 +255,8 @@ const DEVICES = {
       button_right: 73,
       button_bottom: 537,
       bottom_left: 2259,
+      screen_width: 1920,
+      screen_height: 1080,
     },
   },
   'iPhoneSE': {
@@ -612,11 +640,15 @@ const DEVICES = {
 export default DEVICES
 
 export const deviceWidth = (deviceName, deviceOrientation) =>
+    DEVICES[deviceName][deviceOrientation].hasOwnProperty('screen_width') ?
+        DEVICES[deviceName][deviceOrientation].screen_width :
     DEVICES[deviceName][deviceOrientation].image_width
     - DEVICES[deviceName][deviceOrientation].screen_left
     - DEVICES[deviceName][deviceOrientation].screen_right
 
 export const deviceHeight = (deviceName, deviceOrientation) =>
+    DEVICES[deviceName][deviceOrientation].hasOwnProperty('screen_height') ?
+        DEVICES[deviceName][deviceOrientation].screen_height :
     DEVICES[deviceName][deviceOrientation].image_height
     - DEVICES[deviceName][deviceOrientation].screen_top
     - DEVICES[deviceName][deviceOrientation].screen_bottom

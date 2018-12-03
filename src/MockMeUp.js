@@ -128,7 +128,14 @@ class MockMeUp extends React.Component {
                   .querySelector(`input[name="${mockmeSettings.fieldName}"]`)
           // console.log(hiddenMockMeField)
           if (hiddenMockMeField) {
-            hiddenMockMeField.value = this.returnCanvas.current.toDataURL()
+            hiddenMockMeField.value = JSON.stringify({
+              device: {
+                deviceName,
+                deviceOrientation,
+                deviceColor
+              },
+              data: this.returnCanvas.current.toDataURL(),
+            })
           }
         }
       }

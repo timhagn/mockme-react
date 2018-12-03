@@ -19,6 +19,7 @@ export const getEnvVariables = () => {
   })
 }
 
+
 /**
  * Fixes wrong selections for MockMeForm.
  * @param name
