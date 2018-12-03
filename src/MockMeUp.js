@@ -135,8 +135,7 @@ class MockMeUp extends React.Component {
                 deviceColor
               },
               imageString: this.props.imageString,
-              data: this.returnCanvas.current.toDataURL(),
-            })
+            }) + '...---IMAGE-DATA---...' + this.returnCanvas.current.toDataURL()
           }
         }
       }
