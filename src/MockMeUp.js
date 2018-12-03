@@ -3,6 +3,7 @@ import 'html5-device-mockups/dist/device-mockups.min.css'
 import html2canvas from 'html2canvas'
 import PropTypes from 'prop-types'
 import DEVICES from './DeviceConstants'
+import { arePropsDifferent } from './HelperFunctions'
 
 const htmlTemplate = `
 <div class="device-wrapper" style="{device-width}">
@@ -30,18 +31,10 @@ class MockMeUp extends React.Component {
     this.updateMockupContainer()
   }
 
-  arePropsDifferent = (prevProps, newProps) => (
-      prevProps.deviceColor !== newProps.deviceColor ||
-      prevProps.deviceName !== newProps.deviceName ||
-      prevProps.deviceOrientation !== newProps.deviceOrientation ||
-      prevProps.mockUpStyle !== newProps.mockUpStyle ||
-      prevProps.srcImage !== newProps.srcImage
-  )
-
   componentDidUpdate(prevProps) {
     const newProps = this.fixProps()
 
-    if (this.arePropsDifferent(prevProps, newProps)) {
+    if (arePropsDifferent(prevProps, newProps)) {
       newProps.srcImage ? this.loadImage() : this.updateMockupContainer()
     }
   }

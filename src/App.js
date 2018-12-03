@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import DropzoneWithPreview from "./DropzonePreview";
+import DropzoneWithPreview from "./MockMeForm";
 
 class App extends Component {
   render() {

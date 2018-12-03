@@ -52,7 +52,7 @@ Spin it up and drop an image on the marked dropzone.
 Below you are gonna see a preview of your image and the MockUp.  
 After dropping an image, html2canvas will create a canvas you can download it from. 
 
-See `src/DropzonePreview.js` for a simple usage example with `react-dropzone`.  
+See `src/MockMeForm.js` for a simple usage example with `react-dropzone`.  
 See `src/MockMeUp.js` for an in-depth view.
 
 The class `<MockMeUp />` has the following PropTypes at the moment:
