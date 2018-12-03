@@ -459,6 +459,8 @@ const DEVICES = {
       button_right: 0,
       button_bottom: 0,
       bottom_left: 0,
+      screen_width: 1440,
+      screen_height: 900,
     },
   },
   'Macbook2015': {
@@ -489,6 +491,8 @@ const DEVICES = {
       button_right: 0,
       button_bottom: 0,
       bottom_left: 0,
+      screen_width: 1680,
+      screen_height: 1050,
     },
   },
   'SamsungTV': {

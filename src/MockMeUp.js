@@ -98,7 +98,7 @@ class MockMeUp extends React.Component {
 
     const screenStyle = mockupImage === '' ? {} : `
       background-image: url('${mockupImage}');
-      background-position: center;
+      background-position: center top;
       background-size: contain;
       background-repeat: no-repeat;
       ${mockUpStyle}

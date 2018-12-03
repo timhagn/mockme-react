@@ -218,7 +218,7 @@ class DropzoneWithPreview extends React.Component {
                     deviceName={deviceName}
                     deviceOrientation={deviceOrientation}
                     deviceColor={deviceColor}
-                    mockUpStyle={`background-size: ${imageSize};`}
+                    mockUpStyle={`background-size: ${imageSize}; background-position: top center;`}
                     mockmeSettings={this.props.mockmeSettings}
                     imageString={imageString} />
         </>
