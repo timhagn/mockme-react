@@ -134,6 +134,7 @@ class MockMeUp extends React.Component {
                 deviceOrientation,
                 deviceColor
               },
+              imageString: this.props.imageString,
               data: this.returnCanvas.current.toDataURL(),
             })
           }
@@ -191,6 +192,7 @@ MockMeUp.propTypes = {
   deviceColor: PropTypes.string,
   deviceInnerWidth: PropTypes.string,
   mockUpStyle: PropTypes.string,
+  imageString: PropTypes.string,
 }
 
 export default MockMeUp

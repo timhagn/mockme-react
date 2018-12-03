@@ -49,6 +49,7 @@ class DropzoneWithPreview extends React.Component {
       deviceOrientation: 'portrait',
       deviceColor: DEVICES['Chromebook']['portrait'].color[0],
       imageSize: 'contain',
+      imageString: '',
       url: '',
       noogOption: false,
       resetOption: false,
@@ -126,6 +127,7 @@ class DropzoneWithPreview extends React.Component {
       // console.log(screengrabURI)
       this.setState({
         files: [],
+        imageString: grabURL,
         url: screengrabURI,
         resetOption: false,
       })
@@ -150,6 +152,7 @@ class DropzoneWithPreview extends React.Component {
       deviceOrientation,
       deviceColor,
       imageSize,
+      imageString,
     } = this.state
 
     // console.log('settingsDropzone', this.state)
@@ -216,7 +219,8 @@ class DropzoneWithPreview extends React.Component {
                     deviceOrientation={deviceOrientation}
                     deviceColor={deviceColor}
                     mockUpStyle={`background-size: ${imageSize};`}
-                    mockmeSettings={this.props.mockmeSettings} />
+                    mockmeSettings={this.props.mockmeSettings}
+                    imageString={imageString} />
         </>
     );
   }
