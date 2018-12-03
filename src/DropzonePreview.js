@@ -68,6 +68,34 @@ class DropzoneWithPreview extends React.Component {
     });
   }
 
+  checkChange = (name, value) => {
+    if (name === 'imageSize') {
+      return { [name]: value }
+    }
+    else {
+      const deviceName = name === 'deviceName' ? value : this.state.deviceName,
+          deviceOrientation = name === 'deviceOrientation' ? value : this.state.deviceOrientation,
+          deviceColor = name === 'deviceColor' ? value : this.state.deviceColor
+
+      const currentOrientation =
+          (DEVICES[deviceName].hasOwnProperty(deviceOrientation) &&
+              Array.isArray(DEVICES[deviceName][deviceOrientation].color)) ?
+              deviceOrientation :
+              Object.keys(DEVICES[deviceName])[0]
+
+      const currentColor =
+          DEVICES[deviceName][currentOrientation].color.indexOf(deviceColor) === -1 ?
+              DEVICES[deviceName][currentOrientation].color[0] :
+              deviceColor
+
+      return {
+        deviceName,
+        deviceOrientation: currentOrientation,
+        deviceColor: currentColor,
+      }
+    }
+  }
+
   /**
    * Automatically handle dropdowns.
    * @param name
@@ -76,8 +104,9 @@ class DropzoneWithPreview extends React.Component {
   handleChange = name => {
     if (!this.handlers[name]) {
       this.handlers[name] = event => {
-        this.setState({ [name]: event.target.value })
-      };
+        const newState = this.checkChange(name, event.target.value)
+        this.setState(newState)
+      }
     }
     return this.handlers[name]
   }

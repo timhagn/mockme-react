@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
  * @param name
  * @param label
  * @param value
- * @param checked
+ * @param isChecked
  * @return {*}
  * @constructor
  */
